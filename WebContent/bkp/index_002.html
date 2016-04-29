@@ -1,0 +1,68 @@
+<html>
+
+<head>
+	<script src = "scripts/angular.js"> </script>
+</head>
+
+<body ng-app="myapp">
+
+	<div ng-controller="UserController" >
+		<div ng-show= "loading_flag"><img src="images/loading.gif"></div>
+		<table style="width: 400px" border="1">
+			<tr ng-repeat="u in users">
+				<th>{{u.name}} </th>
+				<th>{{u.password}} </th>
+				<td>{{u.emailId}} </td>
+				<td>{{u.age}} </td>
+				<td><a href="#" ng-click="edit_user(user)">EditUser</a></td>
+			</tr>
+		</table>
+		showing {{users.length}} users
+		<br><br>
+		<button ng-click="user_entry=true">AddNewUser</button>
+		<br><br><br>
+		<div ng-show = "user_entry">
+		<form novalidate>
+	          <div><input placeholder="Username" ng-model="user.name" type="text"></div>
+	          <div><input placeholder="Password" ng-model="user.password" type="password" value=""></div>
+	          <div><input placeholder="E-mail" ng-model="user.emailId" type="text"></div>
+	          <div ><input placeholder="Age" ng-model="user.age" type="text" value=""></div>
+	          <input type="button" value="Cancel" ng-click="user_entry=false" ></input>
+	          <input type="button" value="Save" ng-click="add_user(user)" ></input>
+        </form>
+        </div>
+	</div>
+	
+
+	<script>
+	angular.module("myapp",[])
+		.controller("UserController", function($http, $log, $scope){
+			$scope.users = {};
+			$scope.loading_flag = true;
+			$scope.user_entry = false;
+			$log.debug("Getting user...");
+
+			var promise = $http.get("rest/user");
+			console.log(promise);
+			promise.success(function(data, status, headers, config){
+				$scope.users = data;
+				$scope.loading_flag = false;
+			});
+			promise.error(function(data,status, headers, config){
+				alert("Failure");
+				$scope.loading_flag = false;
+			});
+			
+			$scope.add_user = function(user){
+				$http.post("rest/user",user)
+				.success(function(data){
+					$log.debug(data);
+					$scope.users.push($scope.user);
+				});
+			};
+			
+		});
+	</script>
+
+</body>
+</html>

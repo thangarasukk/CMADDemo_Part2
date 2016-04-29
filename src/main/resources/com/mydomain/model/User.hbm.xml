@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.mydomain.model.User" table="users" schema="cmad_blog" >
+		<id name="userId" type="int">
+			<column name="user_id" />
+			<generator class="native" />
+		</id>
+		<property name="username" type="string">
+			<column name="username" length="30" />
+		</property>
+		<property name="password" type="string">
+			<column name="password" length="30" />
+		</property>
+		<property name="emailId" type="string">
+			<column name="EMAIL_ID" length="30" />
+		</property>
+	</class>
+</hibernate-mapping>

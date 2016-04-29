@@ -1,0 +1,164 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="A blog for CMAD Development">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Thanga Animesh">
+        <title>CMAD Blog</title>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,300,700' rel='stylesheet' type='text/css'>
+
+        <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <style>
+            body {
+                padding-top: 50px;
+                padding-bottom: 20px;
+            }
+        </style>
+        <!-- <link rel="stylesheet" href="css/bootstrap-theme.min.css"> -->
+        <!-- <link href="bootstrap-custom/css/custom.bootstrap.css" rel="stylesheet" /> -->
+        <!-- https://bootswatch.com/darkly/ -->
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        <script src="js/vendor/jquery-2.1.3.js"> </script>
+        <script>
+            $.get("rest/blog", function(data){
+                var rowTemplate2 = $("#template_blog_list table").html();
+                console.log(rowTemplate2);
+                for(index in data){
+                    var row = rowTemplate2.replace("list_id",(index))
+                                .replace("title",data[index].title);
+                    $("#BlogList").append(row);
+                }
+            });
+
+
+            $.get("rest/blog", function(data){
+                var rowTemplate = $("#template_article_list table").html();
+                console.log(rowTemplate);
+                for(index in data){
+                    var row = rowTemplate.replace("article_title",data[index].title)
+                                .replace("article_data",data[index].data);
+                    $("#ArticleList").append(row);
+                }
+            });
+        
+        </script>
+        
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+    <div id="template_blog_list" style="display: none;" >
+        <table >
+            <tr class="list-group-item"><td>list_id</td><td>title</td></tr>
+        </table>
+    </div>
+
+    <div id="template_article_list" style="display: none;" >
+    <table >
+        <tr>
+        <td><h2><a href="html/singlepost.html">article_title</a></h2></td>
+        <td><p class="lead">article_data</p><hr></td>
+        </tr>
+    </table>
+    </div>
+
+    <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+      <div class="container">
+          <div class="navbar-header">
+              <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+              <a href="index.html" class="navbar-brand">CMAD Blog</a>
+          </div>
+          <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+              <form class="navbar-form navbar-right" role="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+              <ul class="nav navbar-nav">
+                  <li class="active"><a>Home</a></li>
+                  <li><a href="signup.html">Singup</a></li>
+                  <li><a href="html/addpost.html">NewBlog</a></li>
+                  <!-- <li><a href="html/about.html">About</a></li> -->
+              </ul>
+          </nav>
+      </div>
+    </header>
+        
+        <div class="container">
+          <div class="row">
+          
+            <div class="col-md-8">
+                <!-- heading -->
+                <h1>Latest Posts</h1>
+                <div id="ArticleList" >
+                    <table >
+                        <tr>
+                        <td><h2><a href="html/singlepost.html"></a></h2></td>
+                        <td><p class="lead"></p><hr></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h4>Post Titles</h4>
+                </div>
+                <ul class="list-group">
+                  <!-- <li class="list-group-item"><a href="singlepost.html">1. Aries Sun Sign March 21 - April 19</a></li> -->
+                </ul>
+            <table id="BlogList">
+                <tr><td></td><td></td></tr>
+            </table>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+        <footer>
+          <div class="container">
+              <hr />
+              <p class="text-center">Copyright © CMAD Blog 2016. All rights reserved.</p>
+          </div>
+        </footer>
+
+        
+        <!-- Scripts Addition. -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.js"><\/script>')</script>
+        <!-- <script src="js/vendor/bootstrap.min.js"></script> -->
+        <script src="bootstrap-custom/js/bootstrap.min.js"></script>
+        <script src="js/main.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='//www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+        </script>
+    </body>
+</html>

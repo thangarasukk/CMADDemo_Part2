@@ -12,7 +12,7 @@ import org.mongodb.morphia.annotations.Indexes;
 
 /**
  * User of a particular site
- * @author maruthir
+ * @author thangarasu & animesh
  *
  */
 @Entity("users")
@@ -20,25 +20,13 @@ import org.mongodb.morphia.annotations.Indexes;
     @Index(value = "name", fields = @Field("name"))
 )
 public class User {
+    private String name;
+    private String email;
+    private String password;
+    private int age;
 	@Id
     private ObjectId id;
-    private String name;
-    private String first;
-    private String last;
-    private String email;
-    private ObjectId siteId;
-    private String password;
-    private List<ObjectId> departmentIds;
     
-    
-	public List<ObjectId> getDepartmentIds() {
-		if(departmentIds==null)
-			departmentIds = new ArrayList<ObjectId>();
-		return departmentIds;
-	}
-	public void setDepartmentIds(List<ObjectId> departmentIds) {
-		this.departmentIds = departmentIds;
-	}
 	public String getPassword() {
 		return password;
 	}
@@ -51,35 +39,23 @@ public class User {
 	public void setId(ObjectId id) {
 		this.id = id;
 	}
-	public String getFirst() {
-		return first;
-	}
-	public void setFirst(String first) {
-		this.first = first;
-	}
-	public String getLast() {
-		return last;
-	}
-	public void setLast(String last) {
-		this.last = last;
-	}
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public ObjectId getSiteId() {
-		return siteId;
-	}
-	public void setSiteId(ObjectId siteId) {
-		this.siteId = siteId;
-	}
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
 	}
 
     

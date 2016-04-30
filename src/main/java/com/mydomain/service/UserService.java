@@ -1,5 +1,6 @@
 package com.mydomain.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -12,11 +13,14 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateOperations;
 
+import com.mydomain.infra.ServicesFactory;
 import com.mydomain.model.User;
+import com.mydomain.model.dto.UserDTO;
 
 @Path("/user")
 public class UserService {
@@ -39,19 +43,50 @@ public class UserService {
 	
 	@GET
 	@Produces({MediaType.APPLICATION_JSON})
-	public List<User> getUsers() {
+	public List<UserDTO> getUsers() {
 		Datastore dataStore = ServicesFactory.getMongoDB();
 		List<User> users = dataStore.createQuery(User.class).asList();
-		return users;
+		List<UserDTO> usersDtoList = new ArrayList();
+		
+		for(int index = 0; index < users.size(); index++){
+			UserDTO usersDto = new UserDTO();
+			usersDto.fillFromModel(users.get(index));
+			usersDtoList.add(usersDto);
+		}
+		return usersDtoList;
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void createUser(User u){
+	public void createUser(UserDTO userDto){
+		User user = userDto.toModel();
 		Datastore dataStore = ServicesFactory.getMongoDB();
-		dataStore.save(u);
+		dataStore.save(user);
 	}
 	
-
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void updateUser(UserDTO userDto){
+		User user = userDto.toModel();
+		Datastore dataStore = ServicesFactory.getMongoDB();
+		UpdateOperations<User> ops;
+		ops = dataStore.createUpdateOperations(User.class);
+		ops.set("name", 	user.getName());
+		ops.set("email", 	user.getEmail());
+		ops.set("password", user.getPassword());
+		ops.set("age", 		user.getAge());
+		Query<User> updateQuery = dataStore.createQuery(User.class).field("_id").equal(user.getId());
+		dataStore.update(updateQuery, ops);
+	}
 	
+	@DELETE
+	@Path("/{param}")
+	@Produces({MediaType.APPLICATION_JSON})
+	public void deleteUser(@PathParam("param") String id) {
+		UserDTO userDto = new UserDTO();
+		User user = userDto.toModel(id);
+		Datastore dataStore = ServicesFactory.getMongoDB();
+		Query<User> deleteQuery = dataStore.createQuery(User.class).field("_id").equal(user.getId());
+		dataStore.delete(deleteQuery);
+	}
 }

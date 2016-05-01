@@ -1,8 +1,5 @@
 package com.mydomain.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Field;
@@ -58,5 +55,11 @@ public class User {
 		this.age = age;
 	}
 
-    
+//	public UpdateOperations<User> createUpdateOperations(UpdateOperations<User> operations){
+//		operations.set("name", 		this.getName());
+//		operations.set("email", 	this.getEmail());
+//		operations.set("password", 	this.getPassword());
+//		operations.set("age",		this.getAge());
+//		return operations;
+//	}
 }

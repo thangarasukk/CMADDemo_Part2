@@ -1,9 +1,6 @@
 package com.mydomain.model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Field;

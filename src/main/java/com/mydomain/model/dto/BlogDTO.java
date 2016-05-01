@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import org.bson.types.ObjectId;
 import com.mydomain.model.Blog;
+import com.mydomain.model.User;
 
 
 /**
@@ -30,6 +31,13 @@ public class BlogDTO implements Serializable{
     	blog.setPostedUserName(postedUserName);
     	if(postedUserId!=null)
     		blog.setPostedUserId(new ObjectId(postedUserId));
+    	return blog;
+    }
+    
+    public Blog toModel(String id){
+    	Blog blog = new Blog();
+    	if(id!=null)
+    		blog.setId(new ObjectId(id));
     	return blog;
     }
     

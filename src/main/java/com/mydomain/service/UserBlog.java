@@ -1,10 +1,10 @@
 package com.mydomain.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -36,24 +36,22 @@ public class UserBlog {
 	
 	@GET
 	@Produces({MediaType.APPLICATION_JSON})
-	public List<BlogDTO> getBlogs() {
-		return blogDao.getBlogs();
+	public Response getBlogs() {
+		List<BlogDTO> blogDtoResults =  blogDao.getBlogs();
+		return Response.ok(blogDtoResults, MediaType.APPLICATION_JSON).build();
 	}
 
-
-	/* /blog/search?searchstring="second"*/
+	/* /rest/blog/search?searchstring="post"&offset=3&limit=1 */
 	@GET  
 	@Path("/search")  
 	@Produces({MediaType.APPLICATION_JSON})
-	public List<BlogDTO> doSearch(  
-		@QueryParam("searchstring") String searchstring) {  
-		
-		List<BlogDTO> blogDtoSearchResults = blogDao.doSearch(searchstring);
-//		List<BlogDTO> blogDtoSearchResults = blogDao.getBlogs();
-		
-		System.out.println("UserBlog.doSearch() blogDtoSearchResults = "+ blogDtoSearchResults);
-	  
-		return blogDtoSearchResults;  
+	public Response doSearch(  
+		@QueryParam("searchstring") String searchstring,
+		@DefaultValue("0") @QueryParam("offset") int offset,
+		@DefaultValue("2") @QueryParam("limit") int limit) {  
+
+		List<BlogDTO> blogDtoSearchResults = blogDao.doSearch(searchstring,limit,offset);
+		return Response.ok(blogDtoSearchResults, MediaType.APPLICATION_JSON).build();
 	}
 
 	@POST

@@ -26,7 +26,7 @@ public class BlogDao {
 	
 	public List<BlogDTO> getBlogs() {
 		Datastore dataStore = ServicesFactory.getMongoDB();
-		List<Blog> blogs = dataStore.createQuery(Blog.class).asList();
+		List<Blog> blogs = dataStore.createQuery(Blog.class).order("-postedDate").asList();
 		List<BlogDTO> blogsDtoList = new ArrayList();
 		
 		for(int index = 0; index < blogs.size(); index++){
@@ -37,7 +37,7 @@ public class BlogDao {
 		return blogsDtoList;
 	}
 	
-	public List<BlogDTO> doSearch(String searchstring) {
+	public List<BlogDTO> doSearch(String searchstring,int limit,int offset) {
 		List<BlogDTO> blogsDtoList = new ArrayList();
 		Datastore dataStore = ServicesFactory.getMongoDB();
 		/*
@@ -46,7 +46,9 @@ public class BlogDao {
 		*/
 		List<Blog> blogs = dataStore.createQuery(Blog.class)
                 .search(searchstring)
-                .order("postedDate")
+                .order("-postedDate")
+                .offset(offset)
+                .limit(limit)
                 .asList();
 		
 		for(int index = 0; index < blogs.size(); index++){

@@ -1,3 +1,15 @@
+/*******************************************************************************
+ * UserBlog.java, Created: Apr 29, 2016
+ *
+ * Part of CMAD Project - blog
+ *
+ * Copyright (c) 2016 : CISCO
+ * 
+ * P R O P R I E T A R Y & C O N F I D E N T I A L
+ * 
+ * ******************************************************************************
+ */
+
 package com.mydomain.service;
 
 import java.util.List;
@@ -18,6 +30,11 @@ import javax.ws.rs.core.Response;
 import com.mydomain.dao.BlogDao;
 import com.mydomain.model.dto.BlogDTO;
 
+/**
+ * class UserBlog
+ * @author Thangarasu & Animesh
+ * 
+ */
 @Path("/blog")
 public class UserBlog {
 	
@@ -27,6 +44,16 @@ public class UserBlog {
 		this.blogDao = blogDao;
 	}
 	
+	/**
+	 * Getting User Blog
+	 * Rest URL : http://hostname:port/CMADDemo/rest/blog/id
+	 * id - id value of blog. This is unique value created while blog is created
+	 * 
+	 * Example url: http://localhost:8080/CMADDemo/rest/blog/572776a8f63b961ab4aa6fe0
+	 * 
+	 * @param String id - id of the blog requested
+	 * @return Blog that mataches the id given in JSON format
+	 */
 	@GET
 	@Path("/{param}")
 	@Produces({MediaType.APPLICATION_JSON})

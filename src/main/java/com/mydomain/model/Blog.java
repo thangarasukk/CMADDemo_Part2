@@ -7,6 +7,7 @@ import org.mongodb.morphia.annotations.Field;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Index;
 import org.mongodb.morphia.annotations.Indexes;
+import org.mongodb.morphia.utils.IndexType;
 
 /**
  * User of a particular site
@@ -15,7 +16,13 @@ import org.mongodb.morphia.annotations.Indexes;
  */
 @Entity("blogs")
 @Indexes(
-    @Index(value = "title", fields = @Field("title"))
+	{
+		@Index(fields = @Field(value = "content", type = IndexType.TEXT))
+		/*,
+		@Index(fields = @Field(value = "tags", type = IndexType.TEXT)),
+		@Index(fields = @Field(value = "title", type = IndexType.TEXT))
+		*/
+	}
 )
 public class Blog {
     private String title;

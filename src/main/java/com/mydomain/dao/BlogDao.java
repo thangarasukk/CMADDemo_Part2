@@ -36,6 +36,26 @@ public class BlogDao {
 		}
 		return blogsDtoList;
 	}
+	
+	public List<BlogDTO> doSearch(String searchstring) {
+		List<BlogDTO> blogsDtoList = new ArrayList();
+		Datastore dataStore = ServicesFactory.getMongoDB();
+		/*
+		Query<Blog> searchQuery = dataStore.createQuery(Blog.class);
+		searchQuery.criteria("title").hasAnyOf(names),
+		*/
+		List<Blog> blogs = dataStore.createQuery(Blog.class)
+                .search(searchstring)
+                .order("postedDate")
+                .asList();
+		
+		for(int index = 0; index < blogs.size(); index++){
+			BlogDTO blogsDto = new BlogDTO();
+			blogsDto.fillFromModel(blogs.get(index));
+			blogsDtoList.add(blogsDto);
+		}
+		return blogsDtoList;
+	}
 
 	public void createBlog(BlogDTO blogsDto){
 		Blog blog = blogsDto.toModel();

@@ -14,7 +14,7 @@ import com.mydomain.model.Blog;
  *
  */
 public class BlogDTO implements Serializable{
-    private String title;
+	private String title;
     private String content;
     private String tags;
     private Date postedDate= new Date();
@@ -27,6 +27,7 @@ public class BlogDTO implements Serializable{
     	if(id!=null)
     		blog.setId(new ObjectId(id));
     	blog.setTitle(title);
+    	blog.setContent(content);
     	blog.setTags(tags);
     	blog.setPostedDate(postedDate);
     	blog.setPostedUserName(postedUserName);
@@ -94,5 +95,11 @@ public class BlogDTO implements Serializable{
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+    @Override
+	public String toString() {
+		return "BlogDTO [title=" + title + ", content=" + content + ", tags=" + tags + ", postedDate=" + postedDate
+				+ ", postedUserName=" + postedUserName + ", postedUserId=" + postedUserId + ", id=" + id + "]";
 	}
 }

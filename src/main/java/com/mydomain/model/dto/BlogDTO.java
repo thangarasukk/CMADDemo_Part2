@@ -2,9 +2,10 @@ package com.mydomain.model.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import org.bson.types.ObjectId;
+
 import com.mydomain.model.Blog;
-import com.mydomain.model.User;
 
 
 /**

@@ -59,6 +59,14 @@ public class BlogDao {
 		return blogsDtoList;
 	}
 
+	public int getSearchCount(String searchstring) {
+		Datastore dataStore = ServicesFactory.getMongoDB();
+		List<Blog> blogs = dataStore.createQuery(Blog.class)
+                .search(searchstring)
+                .asList();
+		return blogs.size();
+	}
+	
 	public void createBlog(BlogDTO blogsDto){
 		Blog blog = blogsDto.toModel();
 		Datastore dataStore = ServicesFactory.getMongoDB();

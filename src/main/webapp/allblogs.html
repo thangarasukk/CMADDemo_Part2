@@ -1,0 +1,61 @@
+	<div ng-controller="AllBlogsController as allblogsController">
+
+
+    <!-- Main Content -->
+    <div class="container">
+    	<div class = "col-lg-10">
+    	<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+			<dir-pagination-controls
+				max-size="5"
+				direction-links="true"
+				boundary-links="true" >
+			</dir-pagination-controls>
+		</div>
+	
+        <div class="row" dir-paginate="blog in blogs|itemsPerPage:3" ng-init='postedDate=convertJSONDateToJavascriptDate(blog.postedDate)'>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-preview">
+                 <a href="/CMADDemo/index.html#/singleblog" ng-click="updateSelectedBlog(blog)">
+                        <h2 class="post-title">
+                            {{blog.title}}
+                        </h2>
+                 </a>
+                        <h3 class="post-subtitle">
+                            {{blog.content}}
+                        </h3>
+                    <p class="post-meta">Posted by <a href="#">{{blog.postedUserName}}</a> on {{postedDate}}</p>
+                </div>
+                <hr>
+            </div>
+        </div>
+        </div>
+
+         <div class="well col-lg-2">
+        <h4>Blog Categories</h4>
+        <div >
+            <div >
+                <ul class="list-unstyled">
+                    <li><a href="#">Category Name</a>
+                    </li>
+                    <li><a href="#">Category Name</a>
+                    </li>
+                    <li><a href="#">Category Name</a>
+                    </li>
+                    <li><a href="#">Category Name</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+        
+    </div>
+
+
+
+    <!-- Blog Categories Well -->
+
+
+
+	</div>

@@ -1,4 +1,15 @@
 	<h2>Signup Page</h2>
 	<div ng-controller="SignupController as signupController">
 	signup page content
+		<table style="width: 400px" border="1">
+			<th>Title</th>
+			<th>Content</th>
+			<th>postedUserName</th>
+			<tr ng-repeat="blog in blogs">
+				<td>{{blog.title}} </td>
+				<td>{{blog.content}} </td>
+				<td>{{blog.postedUserName}} </td>
+			</tr>
+		</table>
+		
 	</div>

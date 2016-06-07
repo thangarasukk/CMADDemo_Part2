@@ -28,4 +28,22 @@
 		<servlet-name>jersey-serlvet</servlet-name>
 		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
+	
+	<filter>
+    	<filter-name>AuthenticationFilter</filter-name>
+    	<filter-class>com.mydomain.service.AuthenticationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+    	<filter-name>AuthenticationFilter</filter-name>
+    	<url-pattern>/rest/*</url-pattern>
+    </filter-mapping>
+    
+    <servlet>
+	  	<servlet-name>LogoutServlet</servlet-name>
+	  	<servlet-class>com.mydomain.service.LogoutService</servlet-class>
+  	</servlet>
+	  <servlet-mapping>
+	  	<servlet-name>LogoutServlet</servlet-name>
+	  	<url-pattern>/LogoutServlet</url-pattern>
+	  </servlet-mapping>
 </web-app>

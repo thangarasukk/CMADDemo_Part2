@@ -2,11 +2,8 @@
 	var app = angular.module('CMAD', ['ngRoute']).run(function($rootScope){
 		$rootScope.user = {};
 		$rootScope.user.name = "default";
-		$rootScope.user.isAuthenticated = false;
+		$rootScope.user.isAuthenticated = true;
 	});
-
-	
-
 
 	app.controller('HeaderController',['$http' ,'$location', '$rootScope',  function($http,$location,$rootScope){
 		this.user = {};		

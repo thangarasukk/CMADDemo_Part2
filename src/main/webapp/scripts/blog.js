@@ -1,129 +1,17 @@
 (function(){
-	var app = angular.module('Airlines',['ngRoute','angularUtils.directives.dirPagination']).run(function($rootScope){
+	var app = angular.module('CMAD', ['ngRoute','angularUtils.directives.dirPagination']).run(function($rootScope){
 		$rootScope.user = {};
 		$rootScope.user.name = "default";
-		$rootScope.user.isAuthenticated = false;
+		$rootScope.user.isAuthenticated = true;
 	});
 
 	
-	app.config(['$routeProvider', 
-	    function($routeProvider){
-			$routeProvider.
-                when('/login',{
-            		templateUrl : 'tmpl/login.html',
-            		controller : 'LoginController',
-            		controllerAs : 'loginCtrl'
-            	}).
-				when('/allblogs',{
-					templateUrl:'allblogs.html',
-					controller:'AllBlogsController'
-				}).
-				when('/singleblog',{
-					templateUrl:'singleblog.html',
-					controller:'SingleBlogController'
-				}).
-				when('/singleblogpost',{
-					templateUrl:'singleblogpost.html',
-					controller:'SingleBlogPostController'
-				}).
 
-				when('/signup',{
-					templateUrl:'signup.html',
-					controller:'SignupController'
-				}).
-				when('/users',{
-					templateUrl:'users.html',
-					controller:'UserController'
-				}).
-				when('/products',{
-					templateUrl:'products.html',
-					controller:'ProductController'
-				}).
-				when('/', {
-            		templateUrl : 'tmpl/home.html',
-            		controller : 'HomeController',
-            		controllerAs : 'homeCtrl'
-            	}).
-				otherwise({
-					redirectTo: '/'
-				});
-		}]);
-	
-	app.controller('UserController',function($http, $log, $scope){
-		var controller = this;
-		$scope.users=[];
-		$scope.loading = true;
-		$log.debug("Getting users...");
-		$http.get('rest/user').
-		  success(function(data, status, headers, config) {
-			  $scope.users = data;
-			  $scope.loading = false;
-		  }).
-		  error(function(data, status, headers, config) {
-			  $scope.loading = false;
-			  $scope.error = status;
-		  });
-		
-		$scope.addUser2 = function(user){
-			$log.debug(user);
-			$.post("rest/user",user,function(data){
-				$log.debug(data);
-				$scope.users.push(user);
-				$scope.$digest();
-			});
-		}
-		$scope.addUser = function(user){
-			$http.post("rest/user",user)
-			.success(function(data){
-				$log.debug(data);
-				$scope.users.push($scope.user);
-			});
-		};
-		
-		$scope.editUser = function(user){
-			console.log(user);
-			$scope.user = user;
-			$scope.showEditForm=true;
-			$scope.showAddForm=false;
-		}
-		
-		$scope.updateUser = function(user){
-			$log.debug(user);
-			$http.put('rest/user',user).
-			  success(function(data, status, headers, config) {
-				  console.log(data);
-				  $scope.showEditForm=false;
-			  }).
-			  error(function(data, status, headers, config) {
-				  $scope.error = status;
-				  $scope.showEditForm=false;
-			  });
-
-		}
-	});
-	
-	app.controller('AddController',function($http, $log, $scope){
-		
-	});
-	
-	app.controller('ProductController',function($http, $log, $scope){
-		var controller = this;
-		$scope.products=[];
-		$log.debug("Getting products...");
-
-		$http.get('product.json').
-		  success(function(data, status, headers, config) {
-			  $scope.products = data;
-		  }).
-		  error(function(data, status, headers, config) {
-			  $scope.error = status;
-		  });
-	});
-
-    app.controller('SignupController',function($http, $log, $scope){
+    app.controller('SignUpController',function($http, $log, $scope){
 		var controller = this;
 		$scope.user=[];
 		$log.debug("Getting blogs...");
+		console.log("[AniB]: blog.js :: SignupController");
 
  		$scope.addUser = function(user){
      		$log.debug("SignupController...in addUser");
@@ -157,7 +45,7 @@
         			});
             }
             else{
-                alert("passwords are not matched");
+                console.log("passwords are not matched");
             }
 
 		};
@@ -166,7 +54,7 @@
 	app.controller('AllBlogsController',function($http, $log, $scope, GlobalStroage){
 		var controller = this;
 		$scope.blogs=[];
-		$log.debug("Getting blogs...");
+		console.log("[AniB]: blog.js :: AllBlogsController");
         this.selectedBlog;
 
 		$http.get('rest/blog').
@@ -196,7 +84,7 @@
 		$scope.blog=[];
         $scope.postedDate="";
 		$scope.loading = true;
-		$log.debug("Getting blog in SingleBlogController...");
+		console.log("[AniB]: blog.js :: SingleBlogController");
 		$http.get('rest/blog/'+selectedBlogId).
 		  success(function(data, status, headers, config) {
 			  $scope.blog = data;
@@ -234,7 +122,7 @@
 		var controller = this;
 		$scope.blog=[];
 		$scope.loading = true;
-		$log.debug("SingleBlogPostController...");
+		console.log("[AniB]: blog.js :: SingleBlogPostController");
         $scope.showEditForm=false;
         $scope.showAddForm=true;
         $scope.blog.title="";
@@ -282,7 +170,7 @@
 
 	app.controller('LoginController', ['$http' ,'$location', '$rootScope', function($http, $location,$rootScope){
 		this.login = {};
-		console.log("[AniB]: loginCtrl: ");
+		console.log("[AniB]: blog.js :: LoginController");
 		this.checkUser = function(){
 			str = JSON.stringify(this.login);
 			console.log("[AniB]: checkUser(): " +str);
@@ -310,30 +198,15 @@
 	}]);
     
 	app.controller('HeaderController',['$http' ,'$location', '$rootScope',  function($http,$location,$rootScope){
-		this.user = {};		
-		this.searchField = {};
-
-		$http.get("rest/user/").then(
-			function(response){
-				//Sucess Callback
-				str = JSON.stringify(response);
-				console.log("[AniB]: Sucess Callback: " +str);
-				
-			},
-			function(response){
-				//failure callback
-				str = JSON.stringify(response);
-				console.log("[AniB]: Failure Callback: " +response.status);
-				if (response.status === 401 || response.status === 404 ) {
-					$location.path('/login');
-				}
-			});
-		
-		this.search = function(){
-			str = JSON.stringify(this.search);
-			console.log("[AniB]: search(): " +str);
-			this.search = {};
-		};
+		console.log("[AniB]: blog.js :: HeaderController");		
+		this.tab=1;
+		this.selectTab = function(setTab){
+            this.tab = setTab;
+        };
+        this.isSelected = function(checkTab){
+            return this.tab === checkTab;
+        };
+        
 		this.logout = function(){
 			console.log("[AniB]: Logout");
 			$http.get("LogoutServlet").then(

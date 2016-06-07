@@ -22,9 +22,7 @@ angular.module('CMAD').config(function($routeProvider){
 		controller:'SingleBlogPostController'
 	}).
 	when('/', {
-		templateUrl : 'tmpl/home.html',
-		controller : 'HomeController',
-		controllerAs : 'homeCtrl'
+		redirectTo : '/allblogs'
 	})
 	.otherwise({
 		redirectTo : '/'

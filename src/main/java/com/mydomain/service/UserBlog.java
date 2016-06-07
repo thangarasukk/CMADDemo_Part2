@@ -12,8 +12,12 @@
 
 package com.mydomain.service;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -24,6 +28,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -42,6 +47,10 @@ import com.mydomain.model.dto.Count;
  */
 @Path("/blog")
 public class UserBlog {
+	@Context 
+	private HttpServletRequest reqContext;
+	@Context 
+	private HttpServletResponse respContext;
 	
 	BlogDao blogDao = new BlogDao();
 	
@@ -112,12 +121,20 @@ public class UserBlog {
 	 * 
 	 * @param None
 	 * @return All user Blogs in JSON format
+	 * @throws IOException 
 	 */
 	@GET
 	@Produces({MediaType.APPLICATION_JSON})
-	public Response getBlogs() {
-		List<BlogDTO> blogDtoResults =  blogDao.getBlogs();
-		return Response.ok(blogDtoResults, MediaType.APPLICATION_JSON).build();
+	public Response getBlogs() throws IOException {
+		HttpSession session=reqContext.getSession(false);
+		if(session!=null){  
+			System.out.println("UserBlog.getBlogs()");
+			List<BlogDTO> blogDtoResults =  blogDao.getBlogs();
+			return Response.ok(blogDtoResults, MediaType.APPLICATION_JSON).build();			
+		}else{
+			respContext.sendError(401, "Invalid authenitcation details");
+			return null;
+		}
 	}
 	
 	/**

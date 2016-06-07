@@ -5,6 +5,8 @@
 		$rootScope.user.isAuthenticated = true;
 	});
 
+	
+
     app.controller('SignUpController',function($http, $log, $scope){
 		var controller = this;
 		$scope.user=[];
@@ -196,30 +198,15 @@
 	}]);
     
 	app.controller('HeaderController',['$http' ,'$location', '$rootScope',  function($http,$location,$rootScope){
-		this.user = {};		
-		this.searchField = {};
-		console.log("[AniB]: blog.js :: HeaderController");
-		$http.get("rest/user/").then(
-			function(response){
-				//Sucess Callback
-				str = JSON.stringify(response);
-				console.log("[AniB]: Sucess Callback: " +str);
-				
-			},
-			function(response){
-				//failure callback
-				str = JSON.stringify(response);
-				console.log("[AniB]: Failure Callback: " +response.status);
-				if (response.status === 401 || response.status === 404 ) {
-					$location.path('/login');
-				}
-			});
-		
-		this.search = function(){
-			str = JSON.stringify(this.search);
-			console.log("[AniB]: search(): " +str);
-			this.search = {};
-		};
+		console.log("[AniB]: blog.js :: HeaderController");		
+		this.tab=1;
+		this.selectTab = function(setTab){
+            this.tab = setTab;
+        };
+        this.isSelected = function(checkTab){
+            return this.tab === checkTab;
+        };
+        
 		this.logout = function(){
 			console.log("[AniB]: Logout");
 			$http.get("LogoutServlet").then(

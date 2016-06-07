@@ -15,7 +15,9 @@ import com.mydomain.model.Blog;
  */
 public class BlogDTO implements Serializable{
 	private String title;
+	private String synopsis;
     private String content;
+    private String posterUrl;
     private String tags;
     private Date postedDate= new Date();
     private String postedUserName;
@@ -27,7 +29,9 @@ public class BlogDTO implements Serializable{
     	if(id!=null)
     		blog.setId(new ObjectId(id));
     	blog.setTitle(title);
+    	blog.setSynopsis(synopsis);
     	blog.setContent(content);
+    	blog.setPosterUrl(posterUrl);
     	blog.setTags(tags);
     	blog.setPostedDate(postedDate);
     	blog.setPostedUserName(postedUserName);
@@ -46,7 +50,9 @@ public class BlogDTO implements Serializable{
     public BlogDTO fillFromModel(Blog blog){
     	id = blog.getId()!=null?blog.getId().toHexString():null;
     	title = blog.getTitle();
+    	synopsis = blog.getSynopsis();
     	content = blog.getContent();
+    	posterUrl = blog.getPosterUrl();
     	tags = blog.getTags();
     	postedDate = blog.getPostedDate();
     	postedUserName = blog.getPostedUserName();
@@ -101,5 +107,21 @@ public class BlogDTO implements Serializable{
 	public String toString() {
 		return "BlogDTO [title=" + title + ", content=" + content + ", tags=" + tags + ", postedDate=" + postedDate
 				+ ", postedUserName=" + postedUserName + ", postedUserId=" + postedUserId + ", id=" + id + "]";
+	}
+
+	public String getSynopsis() {
+		return synopsis;
+	}
+
+	public void setSynopsis(String synopsis) {
+		this.synopsis = synopsis;
+	}
+
+	public String getPosterUrl() {
+		return posterUrl;
+	}
+
+	public void setPosterUrl(String posterUrl) {
+		this.posterUrl = posterUrl;
 	}
 }

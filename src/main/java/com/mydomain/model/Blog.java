@@ -26,7 +26,9 @@ import org.mongodb.morphia.utils.IndexType;
 )
 public class Blog {
     private String title;
+    private String synopsis;
     private String content;
+    private String posterUrl;
     private String tags;
     private Date postedDate= new Date();
     private String postedUserName;
@@ -75,6 +77,18 @@ public class Blog {
 	}
 	public void setPostedUserId(ObjectId postedUserId) {
 		this.postedUserId = postedUserId;
+	}
+	public String getSynopsis() {
+		return synopsis;
+	}
+	public void setSynopsis(String synopsis) {
+		this.synopsis = synopsis;
+	}
+	public String getPosterUrl() {
+		return posterUrl;
+	}
+	public void setPosterUrl(String posterUrl) {
+		this.posterUrl = posterUrl;
 	}
     
 }

@@ -17,7 +17,7 @@
 		                    <div class="col-md-12">
 		                        <div class="form-group">
 		                            <label for="name">Blog Synopsis</label>
-		                            <textarea name="synopsis" id="blog_synopsis" class="form-control" rows="4" cols="25" required="required"
+		                            <textarea name="synopsis" id="blog_synopsis" class="form-control" rows="4" cols="25" required="required" ng-model="blog.synopsis"
 		                                placeholder=""></textarea>
 		                        </div>
 		                    </div>
@@ -32,7 +32,8 @@
 		                    </div>
 		                </div>	                
 	                    <div class="col-md-12">
-		                    <input type="button" class="btn btn-primary pull-right" value="Save" ng-show="showAddForm" ng-click="addBlog(blog)"></input>
+		                    <!-- <input type="button" class="btn btn-primary pull-right" value="Save" ng-show="showAddForm" ng-click="addBlog(blog)"></input> -->
+		                    <input type="button" class="btn btn-primary pull-right" value="Save" ng-click="addBlog(blog)"></input>
 	                    </div>
 		                </form>
 		            </div>

@@ -165,7 +165,10 @@
         $scope.convertJSONDateToJavascriptDate = function(jsonDate){
         	var dateStr = JSON.parse(jsonDate);
         	return new Date(dateStr).toUTCString();
+        	//return new Date(dateStr).getUTCMonth();
         }
+
+            
 	});
 
     app.service('GlobalStroage', function($log) {
@@ -197,7 +200,9 @@
         $scope.showEditForm=false;
         $scope.showAddForm=true;
         $scope.blog.title="";
+        $scope.blog.synopsis="";
         $scope.blog.content="";
+        $scope.blog.posterUrl="images/content_image/default.jpg";
         $scope.blog.tags="";
         $scope.blog.postedUserName="test_name";
         $scope.blog.postedUserId="5722ffa441fbd6d042b07202";
@@ -210,13 +215,15 @@
 
             var data = JSON.stringify(
                     {
-                      title: blog.title, 
+                      title: blog.title,
+                      synopsis:blog.synopsis,
                       content: blog.content,
+                      posterUrl:blog.posterUrl,
                       tags: blog.tags,
                       postedUserName : blog.postedUserName,
                       postedUserId : blog.postedUserId
                     });
-                 /* alert( data); */
+                  alert( data); 
 
         $log.debug(data);
         $log.debug("rest/blog");

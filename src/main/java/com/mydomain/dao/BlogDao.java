@@ -79,7 +79,9 @@ public class BlogDao {
 		UpdateOperations<Blog> ops;
 		ops = dataStore.createUpdateOperations(Blog.class);
 		ops.set("title", 	blog.getTitle());
+		ops.set("synopsis", blog.getSynopsis());
 		ops.set("content", 	blog.getContent());
+		ops.set("posterUrl", blog.getPosterUrl());
 		ops.set("tags", 	blog.getTags());
 		ops.set("postedDate",blog.getPostedDate());
 		ops.set("postedUserName", 	blog.getPostedUserName());

@@ -1,0 +1,365 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"log",
+				"login"
+			],
+			[
+				"if",
+				"if	if"
+			],
+			[
+				"con",
+				"console"
+			],
+			[
+				"cons",
+				"console"
+			],
+			[
+				"$rou",
+				"$routeProvider	AngularJS"
+			],
+			[
+				"li",
+				"link	Tag"
+			],
+			[
+				"border-c",
+				"border-color"
+			],
+			[
+				"review",
+				"reviewCtrl"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"ng-in",
+				"ng-init	AngularJS"
+			],
+			[
+				"ng-re",
+				"ng-repeat	AngularJS"
+			],
+			[
+				"sign",
+				"Signup"
+			],
+			[
+				"row",
+				"rowTemplate"
+			],
+			[
+				"for",
+				"for	for (…) {…}"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "Packages/User/SublimeREPL-python.sublime-build",
+	"command_palette":
+	{
+		"height": 81.0,
+		"selected_items":
+		[
+			[
+				"fetch",
+				"Fetch: File"
+			],
+			[
+				"fetc",
+				"Fetch: File"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"newfi",
+				"ANF: New File"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"gist",
+				"Gist: Create Public Gist"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 512.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/myModifications/REPO/myTutorials/cmad/FinalCMAD/src/main/webapp/css/main.css",
+		"/C/myModifications/REPO/myTutorials/New folder/AngularDynWeb/src/com/mydomain/service/UserService.java",
+		"/C/myModifications/REPO/myTutorials/New folder/AngularDynWeb/pom.xml",
+		"/C/myModifications/REPO/myTutorials/New folder/AngularDynWeb/src/com/mydomain/service/ServicesFactory.java",
+		"/C/myModifications/REPO/myTutorials/New folder/AngularDynWeb/src/com/mydomain/service/ProductService.java",
+		"/C/myModifications/REPO/myTutorials/New folder/AngularDynWeb/src/com/mydomain/model/User.java",
+		"/C/myModifications/REPO/myTutorials/New folder/AngularDynWeb/src/com/mydomain/model/Product.java",
+		"/C/myModifications/REPO/myTutorials/codeSchool/angularJSApplication/styles/product.js",
+		"/C/myModifications/REPO/myTutorials/codeSchool/angularJSApplication/styles/app.css",
+		"/C/myModifications/REPO/myTutorials/codeSchool/angularJSApplication/product-titile.html",
+		"/C/myModifications/REPO/myTutorials/codeSchool/angularJSApplication/angularJSApplication.sublime-project",
+		"/C/Users/animeshb/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/C/myModifications/REPO/myTutorials/codeSchool/angularJSApplication/.gitignore",
+		"/C/myModifications/REPO/myTutorials/codeSchool/angularJSApplication/ReadMe.md",
+		"/C/Users/animeshb/AppData/Roaming/Sublime Text 2/Packages/User/Fetch.sublime-settings",
+		"/C/myModifications/REPO/myTutorials/codeSchool/angularJSApplication/scripts/vendor/jquery.js",
+		"/C/myModifications/REPO/myTutorials/codeSchool/angularJSApplication/scripts/vendor/bootstrap.js",
+		"/C/myModifications/REPO/myTutorials/codeSchool/angularJSApplication/scripts/vendor/angular.js",
+		"/C/myModifications/REPO/myTutorials/codeSchool/angularJSApplication/styles/vendor/bootstrap.css",
+		"/C/myModifications/REPO/myTutorials/newCMAD/HelloWorld/src/main/webapp/js/login.js",
+		"/C/myModifications/REPO/myTutorials/newCMAD/HelloWorld/src/main/webapp/js/search.js",
+		"/C/myModifications/REPO/myTutorials/newCMAD/HelloWorld/src/main/webapp/index.html",
+		"/C/myModifications/REPO/myTutorials/newCMAD/HelloWorld/src/main/webapp/login.html",
+		"/C/myModifications/REPO/myTutorials/newCMAD/HelloWorld/src/main/webapp/js/signup.js",
+		"/C/myModifications/REPO/myTutorials/newCMAD/HelloWorld/src/main/webapp/html/login.html",
+		"/C/myModifications/REPO/myTutorials/newCMAD/HelloWorld/src/main/webapp/js/main.js",
+		"/C/myModifications/REPO/myTutorials/newCMAD/HelloWorld/src/main/webapp/html/blogPost.html",
+		"/C/myModifications/REPO/myTutorials/newCMAD/HelloWorld/src/main/webapp/html/contact.html",
+		"/C/myModifications/REPO/myTutorials/newCMAD/HelloWorld/src/main/webapp/html/about.html",
+		"/C/myModifications/REPO/myTutorials/newCMAD/HelloWorld/src/main/webapp/js/plugins.js",
+		"/C/myModifications/REPO/myTutorials/newCMAD/HelloWorld/src/main/webapp/css/main.css",
+		"/C/myModifications/REPO/myTutorials/CMAD/pluralSight/workspace2/HelloWorld/src/main/webapp/css/main.css",
+		"/C/myModifications/REPO/myTutorials/CMAD/pluralSight/workspace2/HelloWorld/src/main/webapp/index.html",
+		"/C/myModifications/REPO/myTutorials/CMAD/pluralSight/JAX-RS/CMADFinal/src/main/webapp/js/login.js",
+		"/C/myModifications/REPO/myTutorials/CMAD/CMADBoilerPlate/less/custom.variables.css",
+		"/C/myModifications/REPO/myTutorials/CMAD/CMADBoilerPlate/lib/less/bootstrap.less",
+		"/C/myModifications/REPO/myTutorials/CMAD/CMADBoilerPlate/html/singlepost.html",
+		"/C/myModifications/REPO/myTutorials/CMAD/CMADBoilerPlate/css/bootstrap.css",
+		"/C/myModifications/REPO/myTutorials/CMAD/CMADBoilerPlate/css/main.css",
+		"/C/myModifications/REPO/myTutorials/CMAD/CMADBoilerPlate/html/contact.html",
+		"/C/myModifications/REPO/myTutorials/CMAD/CMADBoilerPlate/html/about.html",
+		"/C/myModifications/REPO/myTutorials/CMAD/CMADBoilerPlate/humans.txt",
+		"/C/Users/animeshb/AppData/Roaming/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/animeshb/AppData/Roaming/Sublime Text 2/Packages/AdvancedNewFile/Default (Windows).sublime-keymap",
+		"/C/Users/animeshb/AppData/Roaming/Sublime Text 2/Packages/User/Side Bar.sublime-settings",
+		"/C/myModifications/REPO/myTutorials/CMAD/CMADBoilerPlate/.gitignore",
+		"/C/myModifications/REPO/myTutorials/CMAD/Essentials_01/Day_01/ReadMe.md",
+		"/C/myModifications/REPO/myTutorials/CMAD/Essentials_01/Day_02/demo/ReadMe.md",
+		"/C/myModifications/REPO/myTutorials/CMAD/Essentials_01/Day_02/demo/RESTCMAD/src/main/webapp/index.html",
+		"/C/Users/animeshb/AppData/Roaming/Sublime Text 2/Packages/Gist/Gist.sublime-settings",
+		"/C/Users/animeshb/AppData/Roaming/Sublime Text 2/Packages/User/Gist.sublime-settings",
+		"/C/Users/animeshb/AppData/Roaming/Sublime Text 2/Packages/DocBlockr/Base File.sublime-settings",
+		"/C/myModifications/REPO/myTutorials/CMAD/Essentials_01/Day_02/demo/RESTCMAD/src/main/webapp/js/app.js",
+		"/C/Users/animeshb/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/C/myModifications/REPO/myTutorials/CMAD/apache-tomcat-8.0.33/webapps/RESTCMAD/index.html",
+		"/C/myModifications/REPO/myTutorials/CMAD/apache-tomcat-8.0.33/webapps/RESTCMAD/js/app.js",
+		"/C/Users/animeshb/AppData/Roaming/Sublime Text 2/Packages/SideBarEnhancements/messages/11.13.2012.1305.0.txt",
+		"/C/Users/animeshb/AppData/Roaming/Sublime Text 2/Packages/Autoprefixer/Autoprefixer.sublime-settings",
+		"/C/myModifications/REPO/myTutorials/Python/AByteOfPython/README.md",
+		"/C/myModifications/REPO/myTutorials/Python/AByteOfPython/Chapter_07/ReadMe.md",
+		"/C/myModifications/REPO/myTutorials/Python/AByteOfPython/Chapter_06/ReadMe.md",
+		"/C/myModifications/REPO/myTutorials/Python/AByteOfPython/Chapter_05/ReadMe.md",
+		"/C/myModifications/REPO/myTutorials/Python/AByteOfPython/Chapter_04/ReadMe.md",
+		"/C/myModifications/REPO/myTutorials/Python/AByteOfPython/Chapter_03/ReadMe.md",
+		"/C/myModifications/REPO/myTutorials/Python/AByteOfPython/.gitignore",
+		"/C/Users/animeshb/Desktop/log.txt",
+		"/C/myModifications/REPO/myTutorials/Python/DataStructuresandAlgorithmsUsingPython/Necaise.sublime-project",
+		"/C/Users/animeshb/AppData/Roaming/Sublime Text 2/Packages/MarkdownEditing/README.md",
+		"/C/myModifications/REPO/myTutorials/Python/DataStructuresandAlgorithmsUsingPython/ReadMe.md",
+		"/C/Users/animeshb/AppData/Roaming/Sublime Text 2/Packages/Theme - Default/Default.sublime-theme",
+		"/C/myModifications/REPO/myTutorials/Python/DataStructuresandAlgorithmsUsingPython/src/hello.py"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"headerCtrl",
+			"login",
+			"Login",
+			"signup",
+			"SignUp",
+			"signup",
+			"login",
+			"toModel",
+			"{{product.name}}",
+			"button",
+			"review",
+			"tab === ",
+			":tab ===",
+			"ng-click=\"tab =",
+			"<li",
+			"><",
+			"lass=\"panel\"",
+			"<p>",
+			"p",
+			"href=\"\"",
+			"../",
+			"h1",
+			"h2",
+			"store.",
+			"message",
+			"();\n",
+			"username",
+			"../",
+			"xhr",
+			"index.html",
+			"fonts",
+			"img",
+			"bootstrap-custom",
+			"bootstrap-3.0.3/",
+			"css",
+			",\n",
+			"email",
+			"username",
+			"email",
+			"username",
+			"\n    ",
+			"    \n",
+			"href",
+			"href=\"",
+			"img",
+			"<img",
+			"       \n",
+			"btn-pri",
+			"panel-default",
+			"bootstrap-theme.min.css",
+			"@import \"",
+			"index.html",
+			"index",
+			"index.html",
+			"js/",
+			"css/",
+			"singlepost.html",
+			"></",
+			"div",
+			"window",
+			"Window",
+			"window",
+			"onload",
+			"**",
+			"%",
+			"/",
+			"*",
+			"-",
+			"+",
+			"side"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 38.0
+	},
+	"input":
+	{
+		"height": 38.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 142.0
+	},
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 492.0,
+	"status_bar_visible": true
+}

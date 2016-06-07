@@ -1,5 +1,9 @@
 (function(){
-	var app = angular.module('Airlines',['ngRoute','angularUtils.directives.dirPagination']);
+	var app = angular.module('Airlines',['ngRoute','angularUtils.directives.dirPagination']).run(function($rootScope){
+		$rootScope.user = {};
+		$rootScope.user.name = "default";
+		$rootScope.user.isAuthenticated = false;
+	});
 
 	
 	app.config(['$routeProvider', 
@@ -282,7 +286,7 @@
 		this.checkUser = function(){
 			str = JSON.stringify(this.login);
 			console.log("[AniB]: checkUser(): " +str);
-			$http.post("/login", this.login).then(
+			$http.post("rest/login", this.login).then(
 				function(response){
 					//Sucess Callback
 					str = JSON.stringify(response);
@@ -309,7 +313,7 @@
 		this.user = {};		
 		this.searchField = {};
 
-		$http.get("webapi/user/").then(
+		$http.get("rest/user/").then(
 			function(response){
 				//Sucess Callback
 				str = JSON.stringify(response);

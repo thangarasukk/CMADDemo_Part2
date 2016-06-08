@@ -23,17 +23,21 @@ public class AuthenticationFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		// TODO Auto-generated method stub
-		System.out.println("AuthenticationFilter.doFilter()");
-		if (((HttpServletRequest) request).getRequestURI().contains("/login")) {
+		System.out.println("AuthenticationFilter.doFilter()" +((HttpServletRequest) request).getRequestURI());
+		System.out.println("AuthenticationFilter.doFilter() user" +((HttpServletRequest) request).getRequestURI().contains("/user"));
+		System.out.println("AuthenticationFilter.doFilter() user" +((HttpServletRequest) request).getRequestURI().contains("/login"));
+		if (((HttpServletRequest) request).getRequestURI().contains("/login") || ((HttpServletRequest) request).getRequestURI().contains("/user")) {
 			chain.doFilter(request, response);
 			return;
 			
 		}
 		HttpSession session=((HttpServletRequest) request).getSession(false);
+		System.out.println("AuthenticationFilter.doFilter() session: " +session);
 		if(session!=null){
 			chain.doFilter(request, response);
 		}else{
 //			((HttpServletResponse)response).setContentType(arg0);
+			System.out.println("AuthenticationFilter.doFilter() sending 401");
 			((HttpServletResponse)response).sendError(401, "Invalid authenitcation details");
 		}
 

@@ -2,12 +2,12 @@
 	var app = angular.module('CMAD', ['ngRoute','angularUtils.directives.dirPagination']).run(function($rootScope){
 		$rootScope.user = {};
 		$rootScope.user.name = "default";
-		$rootScope.user.isAuthenticated = true;
+		$rootScope.user.isAuthenticated = false;
 	});
 
 	
 
-    app.controller('SignUpController',function($http, $log, $scope){
+    app.controller('SignUpController',function($http, $log, $scope, $location){
 		var controller = this;
 		$scope.user=[];
 		$log.debug("Getting blogs...");
@@ -42,6 +42,9 @@
                           $log.debug("error occured");
         				  $scope.error = status;
         				  $scope.showEditForm=false;
+        				  if (data.status === 401) {
+								$location.path('/login');
+							}
         			});
             }
             else{
@@ -51,7 +54,7 @@
 		};
 	});
     
-	app.controller('AllBlogsController',function($http, $log, $scope, GlobalStroage){
+	app.controller('AllBlogsController',function($http, $log, $scope, GlobalStroage, $location){
 		var controller = this;
 		$scope.blogs=[];
 		console.log("[AniB]: blog.js :: AllBlogsController");
@@ -63,6 +66,10 @@
 		  }).
 		  error(function(data, status, headers, config) {
 			  $scope.error = status;
+			  if (status === 401) {
+					$location.path('/login');
+				}
+
 		  });
 
         $scope.updateSelectedBlog = function(blog){
@@ -78,7 +85,7 @@
         }
 	});
 
-	app.controller('SingleBlogController',function($http, $log, $scope, GlobalStroage){
+	app.controller('SingleBlogController',function($http, $log, $scope, GlobalStroage, $location){
 		var controller = this;
         var selectedBlogId = GlobalStroage.getSelectedBlogId();
 		$scope.blog=[];
@@ -95,6 +102,10 @@
 		  error(function(data, status, headers, config) {
 			  $scope.loading = false;
 			  $scope.error = status;
+			  if (status === 401) {
+					$location.path('/login');
+				}
+
 		  });
 
         $scope.convertJSONDateToJavascriptDate = function(jsonDate){
@@ -118,7 +129,7 @@
             }   
     });
 
-	app.controller('SingleBlogPostController',function($http, $log, $scope, GlobalStroage){
+	app.controller('SingleBlogPostController',function($http, $log, $scope, GlobalStroage, $location){
 		var controller = this;
 		$scope.blog=[];
 		$scope.loading = true;
@@ -163,6 +174,10 @@
                       $log.debug("error occured");
     				  $scope.error = status;
     				  $scope.showEditForm=false;
+    				  if (status === 401) {
+						$location.path('/login');
+					}
+
     			});
 		};
 	});
@@ -183,7 +198,7 @@
 					$rootScope.user.name = response.data.username;
 					$rootScope.user.isAuthenticated = true;
 
-					$location.path('/home');
+					$location.path('/');
 				},
 				function(response){
 					str = JSON.stringify(response);
@@ -197,15 +212,11 @@
 		console.log("HomeController: ");
 	}]);
     
-	app.controller('HeaderController',['$http' ,'$location', '$rootScope',  function($http,$location,$rootScope){
+	app.controller('HeaderController',['$http' ,'$location', '$rootScope', '$scope',  function($http,$location,$rootScope, $scope){
 		console.log("[AniB]: blog.js :: HeaderController");		
-		this.tab=1;
-		this.selectTab = function(setTab){
-            this.tab = setTab;
-        };
-        this.isSelected = function(checkTab){
-            return this.tab === checkTab;
-        };
+		$scope.isActive = function (viewLocation) { 
+        	return viewLocation === $location.path();
+    	};
         
 		this.logout = function(){
 			console.log("[AniB]: Logout");

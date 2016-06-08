@@ -39,15 +39,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="index.html" class="navbar-brand">CMAD Blog</a>
+            <a href="#/" class="navbar-brand">CMAD Blog</a>
         </div>
         <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
             <ul class="nav navbar-nav">
-                <li ng-class="{active: headerCtrl.isSelected(1)}"><a href="#/" ng-click="headerCtrl.selectTab(1)">Home</a></li>
-                <li ng-class="{active: headerCtrl.isSelected(2)}"><a href="#/signup" ng-click="headerCtrl.selectTab(2)">Signup</a></li>
-                <li ng-class="{active: headerCtrl.isSelected(3)}"><a href="#/allblogs" ng-click="headerCtrl.selectTab(3)">BlogList</a></li>
-                <li ng-class="{active: headerCtrl.isSelected(4)}"><a href="#/singleblog" ng-click="headerCtrl.selectTab(4)">SingleBlog</a></li>
-                <li ng-class="{active: headerCtrl.isSelected(5)}"><a href="#/singleblogpost" ng-click="headerCtrl.selectTab(5)">PostBlog</a></li>
+                <li ng-class="{ active: isActive('/')}"><a href="#/" >Home</a></li>
+                <li ng-class="{ active: isActive('/signup')}"><a href="#/signup">Signup</a></li>
+                <li ng-class="{ active: isActive('/allblogs')}"><a href="#/allblogs" >BlogList</a></li>
+                <li ng-class="{ active: isActive('/singleblog')}"><a href="#/singleblog">SingleBlog</a></li>
+                <li ng-class="{ active: isActive('/singleblogpost')}"><a href="#/singleblogpost">PostBlog</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown" ng-show="user.isAuthenticated">

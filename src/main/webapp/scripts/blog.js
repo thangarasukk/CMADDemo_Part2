@@ -1,4 +1,5 @@
 (function(){
+
 	var app = angular.module('CMAD', ['ngRoute','angularUtils.directives.dirPagination']).run(function($rootScope){
 		$rootScope.$apply(function() {
 		    $rootScope.user = {};

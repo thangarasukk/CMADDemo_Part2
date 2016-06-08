@@ -1,58 +1,40 @@
 (function(){
 	var app = angular.module('CMAD', ['ngRoute','angularUtils.directives.dirPagination']).run(function($rootScope){
-		$rootScope.user = {};
-		$rootScope.user.name = "default";
-		$rootScope.user.isAuthenticated = false;
+		$rootScope.$apply(function() {
+		    $rootScope.user = {};
+			$rootScope.user.name = "default";
+			$rootScope.user.isAuthenticated = false;
+		});
+		
 	});
 
 	
 
-    app.controller('SignUpController',function($http, $log, $scope, $location){
-		var controller = this;
-		$scope.user=[];
-		$log.debug("Getting blogs...");
-		console.log("[AniB]: blog.js :: SignupController");
+    app.controller('SignUpController',function($http, $log, $scope, $location, $rootScope){
+    	console.log("[AniB]: SignUpController()");
+    	this.signup = {};
+		console.log("[AniB]: signupCtrl: " +this.signup);
+		this.addUser = function(){
+			str = JSON.stringify(this.signup);
+			console.log("[AniB]: addUser(): " +str);
+			$http.post("rest/user", this.signup).then(
+				function(response){
+					//Sucess Callback
+					str = JSON.stringify(response);
+					console.log("[AniB]: Sucess Callback: " +str);
+					
+					// $rootScope.user.name = response.data.userID;
+					// $rootScope.user.isAuthenticated = true;
 
- 		$scope.addUser = function(user){
-     		$log.debug("SignupController...in addUser");
- 		    $log.debug(user);
-
-            var password_confirm = user.password.localeCompare(user.confirmpassword);
-
-            $log.debug("user.password   " + "user.confirmpassword");
-            
-            if(password_confirm == 0){
-                $log.debug("pass word matched");
-                var data = JSON.stringify(
-                    {
-                      name: user.name,
-                      email:user.email,
-                      password: user.password,
-                      age:user.age
-                    });
-                $log.debug(data);
-                $log.debug("before rest/user");
-                $http.post("rest/user",data)
-        			.success(function(data){
-        				$log.debug(data);
-                        $scope.showEditForm=true;
-                        $scope.showAddForm=false;
-        			})
-                    .error(function(data, status, headers, config) {
-                          $log.debug("error occured");
-        				  $scope.error = status;
-        				  $scope.showEditForm=false;
-        				  if (data.status === 401) {
-								$location.path('/login');
-							}
-        			});
-            }
-            else{
-                console.log("passwords are not matched");
-            }
-
+					$location.path('/login');
+				},
+				function(response){
+					str = JSON.stringify(response);
+					console.log("[AniB]: Failure Callback: " +response.status);
+				});
+			this.signup = {};
 		};
-	});
+    });
     
 	app.controller('AllBlogsController',function($http, $log, $scope, GlobalStroage, $location){
 		var controller = this;
@@ -194,9 +176,13 @@
 					//Sucess Callback
 					str = JSON.stringify(response);
 					console.log("[AniB]: Sucess Callback: " +str);
+					$rootScope.$apply(function() {
+						$rootScope.user.name = response.data.username;
+						$rootScope.user.isAuthenticated = true;
+					});
 					
-					$rootScope.user.name = response.data.username;
-					$rootScope.user.isAuthenticated = true;
+					
+					
 
 					$location.path('/');
 				},

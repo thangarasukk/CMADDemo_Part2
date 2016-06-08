@@ -41,6 +41,7 @@ public class UserService {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void createUser(UserDTO userDto){
+		System.out.println("UserService.createUser()");
 		userDao.createUser(userDto);
 	}
 	

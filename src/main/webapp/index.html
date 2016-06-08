@@ -44,14 +44,14 @@
         <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
             <ul class="nav navbar-nav">
                 <li ng-class="{ active: isActive('/')}"><a href="#/" >Home</a></li>
-                <li ng-class="{ active: isActive('/signup')}"><a href="#/signup">Signup</a></li>
+                <li ng-class="{ active: isActive('/signup')}" ng-hide="user.isAuthenticated"><a href="#/signup" >Signup</a></li>
                 <li ng-class="{ active: isActive('/allblogs')}"><a href="#/allblogs" >BlogList</a></li>
                 <li ng-class="{ active: isActive('/singleblog')}"><a href="#/singleblog">SingleBlog</a></li>
                 <li ng-class="{ active: isActive('/singleblogpost')}"><a href="#/singleblogpost">PostBlog</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown" ng-show="user.isAuthenticated">
-                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">{{ (user.name) || "animeshb"}} <b class="caret"></b></a>
+                    <a href="" data-toggle="dropdown" class="dropdown-toggle">{{ (user.name) || "animeshb"}} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Profile</a></li>
                         <li class="divider"></li>

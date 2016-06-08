@@ -61,6 +61,7 @@
             $log.debug(blog);
             GlobalStroage.setSelectedBlogId(blog.id);
             $log.debug(GlobalStroage.getSelectedBlogId());
+            GlobalStroage.setSelectedBlogDetails(blog);
     	}
         
         $scope.convertJSONDateToJavascriptDate = function(jsonDate){
@@ -71,10 +72,12 @@
 	app.controller('SingleBlogController',function($http, $log, $scope, GlobalStroage, $location){
 		var controller = this;
         var selectedBlogId = GlobalStroage.getSelectedBlogId();
-		$scope.blog=[];
+		$scope.blog;
         $scope.postedDate="";
 		$scope.loading = true;
 		console.log("[AniB]: blog.js :: SingleBlogController");
+        $log.debug("SingleBlogController path -- " + $location.path());
+/*
 		$http.get('rest/blog/'+selectedBlogId).
 		  success(function(data, status, headers, config) {
 			  $scope.blog = data;
@@ -91,26 +94,48 @@
 				}
 
 		  });
+*/
 
-        $scope.convertJSONDateToJavascriptDate = function(jsonDate){
+        this.convertJSONDateToJavascriptDate = function(jsonDate){
         	/* var dateStr = JSON.parse(jsonDate); */
         	return new Date(jsonDate).toUTCString();
         };
 
+        $scope.blog = GlobalStroage.getSelectedBlogDetails();
+        $log.debug($scope.blog);
+        document.getElementById('blog_post_content').innerHTML = $scope.blog.content;
+        if (angular.isDefined( $scope.blog.postedDate)){
+            $scope.postedDate = "on " + this.convertJSONDateToJavascriptDate($scope.blog.postedDate);
+        }
+        else{
+            $scope.postedDate = "";
+        }
             
+        $log.debug("$scope.blog.postedDate is " + $scope.blog.postedDate);
+        $log.debug("$scope.postedDate is " + $scope.postedDate);
 	});
 
     app.service('GlobalStroage', function($log) {
         this.selectedBlogId = "defaultblogID";
+        this.selectedBlogDetails;
         
         this.getSelectedBlogId = function(){
                 $log.debug("Inside getSelectedBlogId..");
                 return this.selectedBlogId;
-            }        
+            }
         this.setSelectedBlogId = function(selectedBlogId){
                 $log.debug("Inside setSelectedBlogId..");
                 this.selectedBlogId = selectedBlogId;
-            }   
+            }
+        this.getSelectedBlogDetails = function(){
+                $log.debug("Inside getSelectedBlogDetails..");
+                return this.selectedBlogDetails;
+            }
+        this.setSelectedBlogDetails = function(selectedBlogDetails){
+                $log.debug("Inside setSelectedBlogDetails..");
+                this.selectedBlogDetails = selectedBlogDetails;
+                $log.debug(selectedBlogDetails);
+            }
     });
 
 	app.controller('SingleBlogPostController',function($http, $log, $scope, GlobalStroage, $location){
@@ -127,6 +152,7 @@
         $scope.blog.tags="";
         $scope.blog.postedUserName="test_name";
         $scope.blog.postedUserId="5722ffa441fbd6d042b07202";
+        $scope.selectedBlogDetails;
 
         $log.debug(GlobalStroage.getSelectedBlogId());
 
@@ -144,7 +170,8 @@
                       postedUserName : blog.postedUserName,
                       postedUserId : blog.postedUserId
                     });
-                  alert( data); 
+                  alert( data);
+                  $scope.selectedBlogDetails = blog;
 
             $log.debug(data);
             $log.debug("rest/blog");
@@ -153,6 +180,11 @@
     				$log.debug(data);
                     $scope.showEditForm=true;
                     $scope.showAddForm=false;
+                    GlobalStroage.setSelectedBlogDetails($scope.selectedBlogDetails);
+                    $log.debug("before setting path -- " + $location.path());
+                    $location.path('singleblog');
+                    $log.debug("after setting path -- " + $location.path());
+                    $log.debug("$scope.selectedBlogDetails = " + $scope.selectedBlogDetails);
     			})
                 .error(function(data, status, headers, config) {
                       $log.debug("error occured");

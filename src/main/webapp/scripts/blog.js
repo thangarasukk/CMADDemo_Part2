@@ -1,6 +1,6 @@
 (function(){
 
-	var app = angular.module('CMAD', ['ngRoute','angularUtils.directives.dirPagination']).run(function($rootScope){
+	var app = angular.module('CMAD', ['ngRoute','angularUtils.directives.dirPagination','textAngular']).run(function($rootScope){
 		$rootScope.$apply(function() {
 		    $rootScope.user = {};
 			$rootScope.user.name = "default";
@@ -81,6 +81,7 @@
 			  $scope.loading = false;
               $scope.postedDate = $scope.convertJSONDateToJavascriptDate($scope.blog.postedDate);
               $log.debug($scope.postedDate);
+              document.getElementById('blog_post_content').innerHTML = $scope.blog.content;
 		  }).
 		  error(function(data, status, headers, config) {
 			  $scope.loading = false;

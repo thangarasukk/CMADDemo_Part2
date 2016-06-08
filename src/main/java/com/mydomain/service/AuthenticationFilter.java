@@ -24,9 +24,13 @@ public class AuthenticationFilter implements Filter {
 			throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		System.out.println("AuthenticationFilter.doFilter()" +((HttpServletRequest) request).getRequestURI());
-		System.out.println("AuthenticationFilter.doFilter() user" +((HttpServletRequest) request).getRequestURI().contains("/user"));
-		System.out.println("AuthenticationFilter.doFilter() user" +((HttpServletRequest) request).getRequestURI().contains("/login"));
-		if (((HttpServletRequest) request).getRequestURI().contains("/login") || ((HttpServletRequest) request).getRequestURI().contains("/user")) {
+		System.out.println("AuthenticationFilter.doFilter() user - " +((HttpServletRequest) request).getRequestURI().contains("/user"));
+		System.out.println("AuthenticationFilter.doFilter() login - " +((HttpServletRequest) request).getRequestURI().contains("/login"));
+		System.out.println("AuthenticationFilter.doFilter() blog - " +((HttpServletRequest) request).getRequestURI().contains("/blog"));
+		if (((HttpServletRequest) request).getRequestURI().contains("/login") || 
+			((HttpServletRequest) request).getRequestURI().contains("/user") || 
+			((HttpServletRequest) request).getRequestURI().contains("/blog")) {
+			System.out.println("AuthenticationFilter.doFilter() login or user or blog");
 			chain.doFilter(request, response);
 			return;
 			

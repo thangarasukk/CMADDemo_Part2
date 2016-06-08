@@ -17,6 +17,7 @@ public class LogoutService extends HttpServlet {
 			session.invalidate();  
 			
 		}else{
+			System.out.println("LogoutService.doGet() Invalid authenitcation details");
 			response.sendError(401, "Invalid authenitcation details");
 		}
 	}

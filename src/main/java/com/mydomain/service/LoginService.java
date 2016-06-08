@@ -38,6 +38,7 @@ public class LoginService {
 			authenticatedUser.setEmail("admin@admin.org");
 			return authenticatedUser;
 		}else{
+			System.out.println("LoginService.getAuthenticatedUser() Invalid authenitcation details");
 			respContext.sendError(401, "Invalid authenitcation details");
 		}
 		

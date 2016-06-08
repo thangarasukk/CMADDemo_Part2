@@ -1,5 +1,5 @@
 (function(){
-	var app = angular.module('CMAD', ['ngRoute','angularUtils.directives.dirPagination']).run(function($rootScope){
+	var app = angular.module('CMAD', ['ngRoute','angularUtils.directives.dirPagination','textAngular']).run(function($rootScope){
 		$rootScope.user = {};
 		$rootScope.user.name = "default";
 		$rootScope.user.isAuthenticated = false;

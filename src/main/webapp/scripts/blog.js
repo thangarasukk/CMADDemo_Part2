@@ -212,15 +212,11 @@
 		console.log("HomeController: ");
 	}]);
     
-	app.controller('HeaderController',['$http' ,'$location', '$rootScope',  function($http,$location,$rootScope){
+	app.controller('HeaderController',['$http' ,'$location', '$rootScope', '$scope',  function($http,$location,$rootScope, $scope){
 		console.log("[AniB]: blog.js :: HeaderController");		
-		this.tab=1;
-		this.selectTab = function(setTab){
-            this.tab = setTab;
-        };
-        this.isSelected = function(checkTab){
-            return this.tab === checkTab;
-        };
+		$scope.isActive = function (viewLocation) { 
+        	return viewLocation === $location.path();
+    	};
         
 		this.logout = function(){
 			console.log("[AniB]: Logout");

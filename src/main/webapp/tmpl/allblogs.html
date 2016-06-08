@@ -1,4 +1,4 @@
-<div ng-controller="AllBlogsController as allblogsController" >
+<div ng-controller="AllBlogsController as allblogsController" ng-show="user.isAuthenticated">
 
     <div class="container">
 	    <div class = "col-lg-10">
@@ -52,7 +52,7 @@
 				</dir-pagination-controls>
 			</div>
 		</div>   
-
+<!--
 		<div class="well col-lg-2">
 	    	<h4>Blog Categories</h4>
 	        <div >
@@ -70,6 +70,7 @@
 	            </div>
 	        </div>
 		</div>
+-->		
     </div>   
 
     <!-- Main Content -->

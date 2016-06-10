@@ -36,6 +36,36 @@ public class BlogDao {
 		}
 		return blogsDtoList;
 	}
+
+	public List<BlogDTO> getBlogs(String tag, String userName, String orderBy) {
+		Datastore dataStore = ServicesFactory.getMongoDB();
+		
+		Query<Blog> getQuery = dataStore.createQuery(Blog.class);
+		
+		if(tag != null){
+			getQuery = getQuery.filter("tags = ", tag);
+		}
+
+		if(userName != null){
+			getQuery = getQuery.filter("postedUserName = ", userName);
+		}
+		
+		if((orderBy != null) && orderBy.equals("viewedCount")){
+			getQuery = getQuery.order("-viewedCount");
+		}else{
+			getQuery = getQuery.order("-postedDate");
+		}
+		
+		List<Blog> blogs = getQuery.asList();
+		List<BlogDTO> blogsDtoList = new ArrayList();
+		
+		for(int index = 0; index < blogs.size(); index++){
+			BlogDTO blogsDto = new BlogDTO();
+			blogsDto.fillFromModel(blogs.get(index));
+			blogsDtoList.add(blogsDto);
+		}
+		return blogsDtoList;
+	}	
 	
 	public List<BlogDTO> doSearch(String searchstring,int limit,int offset) {
 		List<BlogDTO> blogsDtoList = new ArrayList();
@@ -83,6 +113,7 @@ public class BlogDao {
 		ops.set("content", 	blog.getContent());
 		ops.set("posterUrl", blog.getPosterUrl());
 		ops.set("tags", 	blog.getTags());
+		ops.set("viewedCount", 	blog.getViewedCount());
 		ops.set("postedDate",blog.getPostedDate());
 		ops.set("postedUserName", 	blog.getPostedUserName());
 		ops.set("postedUserId", 	blog.getPostedUserId());

@@ -19,6 +19,7 @@ public class BlogDTO implements Serializable{
     private String content;
     private String posterUrl;
     private String tags;
+    private int viewedCount;
     private Date postedDate= new Date();
     private String postedUserName;
     private String postedUserId;
@@ -33,6 +34,7 @@ public class BlogDTO implements Serializable{
     	blog.setContent(content);
     	blog.setPosterUrl(posterUrl);
     	blog.setTags(tags);
+    	blog.setViewedCount(viewedCount);
     	blog.setPostedDate(postedDate);
     	blog.setPostedUserName(postedUserName);
     	if(postedUserId!=null)
@@ -54,6 +56,7 @@ public class BlogDTO implements Serializable{
     	content = blog.getContent();
     	posterUrl = blog.getPosterUrl();
     	tags = blog.getTags();
+    	viewedCount = blog.getViewedCount();
     	postedDate = blog.getPostedDate();
     	postedUserName = blog.getPostedUserName();
     	postedUserId = blog.getPostedUserId()!=null?blog.getPostedUserId().toHexString():null;
@@ -123,5 +126,13 @@ public class BlogDTO implements Serializable{
 
 	public void setPosterUrl(String posterUrl) {
 		this.posterUrl = posterUrl;
+	}
+
+	public int getViewedCount() {
+		return viewedCount;
+	}
+
+	public void setViewedCount(int viewedCount) {
+		this.viewedCount = viewedCount;
 	}
 }

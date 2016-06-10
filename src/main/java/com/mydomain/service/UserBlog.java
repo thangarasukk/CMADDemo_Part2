@@ -99,9 +99,11 @@ public class UserBlog {
 	 * 			Sorted by posted date; latest post shall in the top
 	 * 		</dd>
 	 * <p>
-	 * <dl><dt><span class="strong">Rest URL :</span></dt>
-	 * 		<dd><code>http://hostname:port/CMADDemo/rest/blog </code><p>
-	 * 		</dd>
+	 * <dl><dt><span class="strong">Rest URL(s) :</span></dt>
+	 * 		<dd><code>http://hostname:port/CMADDemo/rest/blog </code><p></dd>
+	 * 		<dd><code>http://hostname:port/CMADDemo/rest/blog?tag=movies </code><p></dd>
+	 * 		<dd><code>http://hostname:port/CMADDemo/rest/blog?userName=xyz </code><p></dd> 
+	 * 		<dd><code>http://hostname:port/CMADDemo/rest/blog?orderBy=viewedCount </code><p></dd>
 	 * <p>
 	 * <dl><dt><span class="strong">Example url:</span></dt>
 	 * 		<dd><code>http://localhost:8080/CMADDemo/rest/blog </code></dd>
@@ -125,11 +127,20 @@ public class UserBlog {
 	 */
 	@GET
 	@Produces({MediaType.APPLICATION_JSON})
-	public Response getBlogs() throws IOException {
+	public Response getBlogs(
+		@QueryParam("tag") String tag,
+		@QueryParam("userName") String userName,
+		@QueryParam("orderBy") String orderBy
+		) throws IOException {
+
+		System.out.println("UserBlog.getBlogs() tag = " + tag);
+		System.out.println("UserBlog.getBlogs() userName = " + userName);
+		System.out.println("UserBlog.getBlogs() orderBy = " + orderBy);
+
 		HttpSession session=reqContext.getSession(false);
 		if(session!=null){  
 			System.out.println("UserBlog.getBlogs()");
-			List<BlogDTO> blogDtoResults =  blogDao.getBlogs();
+			List<BlogDTO> blogDtoResults =  blogDao.getBlogs(tag,userName,orderBy);
 			return Response.ok(blogDtoResults, MediaType.APPLICATION_JSON).build();			
 		}else{
 			respContext.sendError(401, "Invalid authenitcation details");

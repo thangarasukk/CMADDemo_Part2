@@ -30,6 +30,7 @@ public class Blog {
     private String content;
     private String posterUrl;
     private String tags;
+    private int viewedCount;
     private Date postedDate= new Date();
     private String postedUserName;
     private ObjectId postedUserId;
@@ -89,6 +90,12 @@ public class Blog {
 	}
 	public void setPosterUrl(String posterUrl) {
 		this.posterUrl = posterUrl;
+	}
+	public int getViewedCount() {
+		return viewedCount;
+	}
+	public void setViewedCount(int viewedCount) {
+		this.viewedCount = viewedCount;
 	}
     
 }

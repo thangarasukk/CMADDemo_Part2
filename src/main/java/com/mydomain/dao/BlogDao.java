@@ -121,6 +121,40 @@ public class BlogDao {
 		dataStore.update(updateQuery, ops);
 	}
 	
+	public int updateBlogViewedCount(String blogId) {
+		int response_code = DaoReturnCodes.RETURN_STATUS_UNKNOWN_ERROR;
+		BlogDTO blogsDto = new BlogDTO();
+		try{
+			Blog blog = blogsDto.toModel(blogId);
+			Datastore dataStore = ServicesFactory.getMongoDB();
+			Query<Blog> getQuery = dataStore.createQuery(Blog.class).field("_id").equal(blog.getId());
+			Blog blogRequested = (Blog) getQuery.get();
+			if(null != blogRequested){
+				UpdateOperations<Blog> ops;
+				ops = dataStore.createUpdateOperations(Blog.class);
+				ops.set("title", 	blogRequested.getTitle());
+				ops.set("synopsis", blogRequested.getSynopsis());
+				ops.set("content", 	blogRequested.getContent());
+				ops.set("posterUrl", blogRequested.getPosterUrl());
+				ops.set("tags", 	blogRequested.getTags());
+				ops.set("viewedCount", 	(blogRequested.getViewedCount() + 1));
+				ops.set("postedDate",blogRequested.getPostedDate());
+				ops.set("postedUserName", 	blogRequested.getPostedUserName());
+				ops.set("postedUserId", 	blogRequested.getPostedUserId());
+				Query<Blog> updateQuery = dataStore.createQuery(Blog.class).field("_id").equal(blog.getId());
+				dataStore.update(updateQuery, ops);
+				response_code = DaoReturnCodes.RETURN_STATUS_OK;
+			}else{
+				response_code = DaoReturnCodes.RETURN_STATUS_CONTENT_NOT_FOUND;
+			}
+		}catch(IllegalArgumentException execption){
+    		System.out.println("BlogDTO.toModel() IllegalArgumentException");
+    		response_code = DaoReturnCodes.RETURN_STATUS_INVALID_ARGUMENT;
+    	}
+		
+		return response_code;
+	}
+	
 	public void deleteBlog(String id) {
 		BlogDTO blogsDto = new BlogDTO();
 		Blog blog = blogsDto.toModel(id);

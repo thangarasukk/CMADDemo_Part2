@@ -33,6 +33,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.mydomain.dao.BlogDao;
+import com.mydomain.dao.DaoReturnCodes;
 import com.mydomain.model.dto.BlogDTO;
 import com.mydomain.model.dto.Count;
 
@@ -51,6 +52,8 @@ public class UserBlog {
 	private HttpServletRequest reqContext;
 	@Context 
 	private HttpServletResponse respContext;
+	
+	private DaoReturnCodes daoReturnCodes = new DaoReturnCodes();
 	
 	BlogDao blogDao = new BlogDao();
 	
@@ -318,6 +321,14 @@ public class UserBlog {
 		blogDao.updateBlog(blogsDto);
 	}
 	
+	@PUT
+	@Path("/viewedcount/{param}") 
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response updateBlogViewedCount(@PathParam("param") String blogId){
+		int response_code = blogDao.updateBlogViewedCount(blogId);
+		return daoReturnCodes.getHttpResponseFromCode(response_code);
+	}
+	
 	/**
 	 * <dl><dt><span class="strong">Description :</span></dt>
 	 * 		<dd>This API deletes the blog of the id given<p>
@@ -333,12 +344,14 @@ public class UserBlog {
 	 * </code></dd>
 	 * 
 	 * @param String id - id of the blog requested
-	 * @return None
+	 * @return 
+	 * @return Response
 	 */
 	@DELETE
 	@Path("/{param}")
 	@Produces({MediaType.APPLICATION_JSON})
-	public void deleteBlog(@PathParam("param") String id) {
+	public Response deleteBlog(@PathParam("param") String id) {
 		blogDao.deleteBlog(id);
+		return Response.ok(null).build();
 	}
 }

@@ -45,7 +45,13 @@ public class BlogDTO implements Serializable{
     public Blog toModel(String id){
     	Blog blog = new Blog();
     	if(id!=null)
-    		blog.setId(new ObjectId(id));
+		try{
+			blog.setId(new ObjectId(id));
+		}
+    	catch(IllegalArgumentException execption){
+    		System.out.println("BlogDTO.toModel() IllegalArgumentException");
+    	}
+    		
     	return blog;
     }
     

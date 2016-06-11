@@ -67,6 +67,76 @@
         $scope.convertJSONDateToJavascriptDate = function(jsonDate){
         	return new Date(jsonDate).toUTCString();
         }
+
+        $scope.setMostViewedCategory = function(){
+    		var selectedCategory = "MostViewedCategory";
+    		$log.debug("inside setMostViewedCategory");
+            $log.debug(selectedCategory);
+            GlobalStroage.setSelectedCategory(selectedCategory);
+    	}
+        $scope.setMovieTagCategory = function(){
+    		var selectedCategory = "MovieTagCategory";
+            $log.debug(selectedCategory);
+            GlobalStroage.setSelectedCategory(selectedCategory);
+    	}
+        $scope.setCiscoTagCategory = function(){
+    		var selectedCategory = "CiscoTagCategory";
+            $log.debug(selectedCategory);
+            GlobalStroage.setSelectedCategory(selectedCategory);
+    	}
+	});
+
+	app.controller('CategoryListController',function($http, $log, $scope, GlobalStroage, $location){
+		var controller = this;
+		$scope.blogs=[];
+		console.log("[AniB]: blog.js :: CategoryListController");
+
+        $scope.selectedCategory = GlobalStroage.getSelectedCategory();
+        $log.debug("selectedCategory = " + $scope.selectedCategory);
+
+        $scope.restQuery = null;
+        $scope.selectedCategoryTitle = "Title";
+        $scope.isMostViewedCategory = false;
+
+        if(true == angular.equals($scope.selectedCategory, "MostViewedCategory")){
+            $scope.restQuery = "rest/blog?orderBy=viewedCount";
+            $scope.selectedCategoryTitle = "Most Viewed Blogs";
+            $scope.isMostViewedCategory = true;
+        } else if(true == angular.equals($scope.selectedCategory, "MovieTagCategory")){
+            $scope.restQuery = "rest/blog?tag=movies";
+            $scope.selectedCategoryTitle = "Movie related Blogs";
+        } else if(true == angular.equals($scope.selectedCategory, "CiscoTagCategory")){
+            $scope.restQuery = "rest/blog?tag=cisco";
+            $scope.selectedCategoryTitle = "Cisco related Blogs";
+        }
+        
+        $log.debug("restQuery = " + $scope.restQuery);
+
+        if($scope.restQuery != null){
+            $http.get($scope.restQuery).
+                success(function(data, status, headers, config) {
+                $scope.blogs = data;
+            }).
+            error(function(data, status, headers, config) {
+                $scope.error = status;
+                if (status === 401) {
+                	$location.path('/login');
+                }
+            });
+        }
+
+        $scope.updateSelectedBlog = function(blog){
+    		this.selectedBlog = blog;
+    		$log.debug("inside CategoryListController.updateSelectedBlog");
+            $log.debug(blog);
+            GlobalStroage.setSelectedBlogId(blog.id);
+            $log.debug(GlobalStroage.getSelectedBlogId());
+            GlobalStroage.setSelectedBlogDetails(blog);
+    	}
+
+        $scope.convertJSONDateToJavascriptDate = function(jsonDate){
+        	return new Date(jsonDate).toUTCString();
+        }
 	});
 
 	app.controller('SingleBlogController',function($http, $log, $scope, GlobalStroage, $location){
@@ -113,11 +183,22 @@
             
         $log.debug("$scope.blog.postedDate is " + $scope.blog.postedDate);
         $log.debug("$scope.postedDate is " + $scope.postedDate);
+
+        if (angular.isDefined( $scope.blog.id)){
+            $http.put('rest/blog/viewedcount/'+$scope.blog.id).
+                success(function(data, status, headers, config) {
+                    $log.debug("rest/blog/viewedcount return success for blog id " + $scope.blog.id);
+                }).
+                error(function(data, status, headers, config) {
+                    $log.debug("rest/blog/viewedcount return failure for blog id " + $scope.blog.id);
+                });
+        }
 	});
 
     app.service('GlobalStroage', function($log) {
         this.selectedBlogId = "defaultblogID";
         this.selectedBlogDetails;
+        this.selectedCategory;
         
         this.getSelectedBlogId = function(){
                 $log.debug("Inside getSelectedBlogId..");
@@ -135,6 +216,15 @@
                 $log.debug("Inside setSelectedBlogDetails..");
                 this.selectedBlogDetails = selectedBlogDetails;
                 $log.debug(selectedBlogDetails);
+            }
+
+        this.getSelectedCategory = function(){
+                $log.debug("Inside getSelectedCategory..");
+                return this.selectedCategory;
+            }
+        this.setSelectedCategory = function(selectedCategory){
+                $log.debug("Inside setSelectedCategory..");
+                this.selectedCategory = selectedCategory;
             }
     });
 

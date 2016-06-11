@@ -13,6 +13,10 @@ angular.module('CMAD').config(function($routeProvider){
 		templateUrl:'tmpl/allblogs.html',
 		controller:'AllBlogsController'
 	}).
+	when('/categorylist',{
+		templateUrl:'tmpl/categorylist.html',
+		controller:'CategoryListController'
+	}).
 	when('/singleblog',{
 		templateUrl:'tmpl/singleblog.html',
 		controller:'SingleBlogController'

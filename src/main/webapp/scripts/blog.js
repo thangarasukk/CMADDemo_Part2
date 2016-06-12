@@ -84,11 +84,41 @@
             $log.debug(selectedCategory);
             GlobalStroage.setSelectedCategory(selectedCategory);
     	}
+
+        $scope.setCmadTagCategory = function(){
+    		var selectedCategory = "CmadTagCategory";
+            $log.debug(selectedCategory);
+            GlobalStroage.setSelectedCategory(selectedCategory);
+    	}
+
+        $scope.setPoliticsTagCategory = function(){
+    		var selectedCategory = "PoliticsTagCategory";
+            $log.debug(selectedCategory);
+            GlobalStroage.setSelectedCategory(selectedCategory);
+    	}
+
+        $scope.setMilitaryTagCategory = function(){
+    		var selectedCategory = "MilitaryTagCategory";
+            $log.debug(selectedCategory);
+            GlobalStroage.setSelectedCategory(selectedCategory);
+    	}
+
+        $scope.setGeneralTagCategory = function(){
+    		var selectedCategory = "GeneralTagCategory";
+            $log.debug(selectedCategory);
+            GlobalStroage.setSelectedCategory(selectedCategory);
+    	}
+
+        $scope.setMyBlogsCategory = function(){
+    		var selectedCategory = "MyBlogsCategory";
+            $log.debug(selectedCategory);
+            GlobalStroage.setSelectedCategory(selectedCategory);
+    	}
 	});
 
-	app.controller('CategoryListController',function($http, $log, $scope, GlobalStroage, $location){
+	app.controller('CategoryListController',function($http, $log, $scope, GlobalStroage, $location, $rootScope){
 		var controller = this;
-		$scope.blogs=[];
+		$scope.blogs=null;
 		console.log("[AniB]: blog.js :: CategoryListController");
 
         $scope.selectedCategory = GlobalStroage.getSelectedCategory();
@@ -97,6 +127,7 @@
         $scope.restQuery = null;
         $scope.selectedCategoryTitle = "Title";
         $scope.isMostViewedCategory = false;
+        $scope.isBlogListValid = false;
 
         if(true == angular.equals($scope.selectedCategory, "MostViewedCategory")){
             $scope.restQuery = "rest/blog?orderBy=viewedCount";
@@ -108,6 +139,21 @@
         } else if(true == angular.equals($scope.selectedCategory, "CiscoTagCategory")){
             $scope.restQuery = "rest/blog?tag=cisco";
             $scope.selectedCategoryTitle = "Cisco related Blogs";
+        } else if(true == angular.equals($scope.selectedCategory, "CmadTagCategory")){
+            $scope.restQuery = "rest/blog?tag=cmad";
+            $scope.selectedCategoryTitle = "CMAD related Blogs";
+        } else if(true == angular.equals($scope.selectedCategory, "PoliticsTagCategory")){
+            $scope.restQuery = "rest/blog?tag=politics";
+            $scope.selectedCategoryTitle = "Politics related Blogs";
+        } else if(true == angular.equals($scope.selectedCategory, "MilitaryTagCategory")){
+            $scope.restQuery = "rest/blog?tag=military";
+            $scope.selectedCategoryTitle = "Military related Blogs";
+        } else if(true == angular.equals($scope.selectedCategory, "GeneralTagCategory")){
+            $scope.restQuery = "rest/blog?tag=general";
+            $scope.selectedCategoryTitle = "General related Blogs";
+        } else if(true == angular.equals($scope.selectedCategory, "MyBlogsCategory")){
+            $scope.restQuery = "rest/blog?userName=" + $rootScope.user.name;
+            $scope.selectedCategoryTitle = "My Blogs";
         }
         
         $log.debug("restQuery = " + $scope.restQuery);
@@ -116,9 +162,16 @@
             $http.get($scope.restQuery).
                 success(function(data, status, headers, config) {
                 $scope.blogs = data;
+                $scope.isBlogListValid = true;
+                $log.debug("restQuery return success with size = " + $scope.blogs.length);
+                if($scope.blogs.length <= 0){
+                    $scope.isBlogListValid = false;
+                }
             }).
             error(function(data, status, headers, config) {
                 $scope.error = status;
+                $scope.isBlogListValid = false;
+                $log.debug("restQuery return error");
                 if (status === 401) {
                 	$location.path('/login');
                 }
@@ -228,7 +281,7 @@
             }
     });
 
-	app.controller('SingleBlogPostController',function($http, $log, $scope, GlobalStroage, $location){
+	app.controller('SingleBlogPostController',function($http, $log, $scope, GlobalStroage, $location, $rootScope){
 		var controller = this;
 		$scope.blog=[];
 		$scope.loading = true;
@@ -240,7 +293,7 @@
         $scope.blog.content="";
         $scope.blog.posterUrl="images/content_image/default.jpg";
         $scope.blog.tags="";
-        $scope.blog.postedUserName="test_name";
+        $scope.blog.postedUserName=$rootScope.user.name;
         $scope.blog.postedUserId="5722ffa441fbd6d042b07202";
         $scope.selectedBlogDetails;
 

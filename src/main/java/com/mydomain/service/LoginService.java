@@ -31,11 +31,22 @@ public class LoginService {
 		System.out.println("LoginService.getAuthenticatedUser() : " +userLogin.getUsername());
 		System.out.println("LoginService.getAuthenticatedUser() : " +userLogin.getPassword());
 		
-		if (userLogin.getPassword().equals("admin")) {
+		;
+		
+		/*if (userLogin.getPassword().equals("admin")) {
 			HttpSession session=reqContext.getSession();
 			session.setAttribute("userName", userLogin.getUsername());
 			authenticatedUser.setUsername(userLogin.getUsername());
 			authenticatedUser.setEmail("admin@admin.org");
+			return authenticatedUser;
+		}else{
+			System.out.println("LoginService.getAuthenticatedUser() Invalid authenitcation details");
+			respContext.sendError(401, "Invalid authenitcation details");
+		}*/
+		if (userLogin.isAuthenticated()) {
+			HttpSession session=reqContext.getSession();
+			session.setAttribute("userName", userLogin.getUsername());
+			authenticatedUser.setUsername(userLogin.getUsername());
 			return authenticatedUser;
 		}else{
 			System.out.println("LoginService.getAuthenticatedUser() Invalid authenitcation details");

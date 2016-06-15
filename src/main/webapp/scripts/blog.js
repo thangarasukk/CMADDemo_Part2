@@ -1,11 +1,9 @@
 (function(){
 
 	var app = angular.module('CMAD', ['ngRoute','angularUtils.directives.dirPagination','textAngular']).run(function($rootScope){
-		$rootScope.$apply(function() {
-		    $rootScope.user = {};
-			$rootScope.user.name = "default";
-			$rootScope.user.isAuthenticated = false;
-		});
+		$rootScope.user = {};
+		$rootScope.user.name = "default";
+		$rootScope.user.isAuthenticated = false;
 		
 	});
 
@@ -353,14 +351,8 @@
 					//Sucess Callback
 					str = JSON.stringify(response);
 					console.log("[AniB]: Sucess Callback: " +str);
-					$rootScope.$apply(function() {
-						$rootScope.user.name = response.data.username;
-						$rootScope.user.isAuthenticated = true;
-					});
-					
-					
-					
-
+					$rootScope.user.name = response.data.username;
+					$rootScope.user.isAuthenticated = true;
 					$location.path('/');
 				},
 				function(response){

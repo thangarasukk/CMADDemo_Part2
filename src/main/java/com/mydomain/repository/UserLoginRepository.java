@@ -1,5 +1,9 @@
 package com.mydomain.repository;
 
+import com.mydomain.dao.UserDao;
+import com.mydomain.model.User;
+import com.mydomain.model.dto.UserDTO;
+
 public class UserLoginRepository {
 	private String username;
 	private String password;
@@ -17,6 +21,17 @@ public class UserLoginRepository {
 		this.password = password;
 	}
 	
-	
+	public Boolean isAuthenticated(){
+		System.out.println("UserLoginRepository.isAuthenticated() " +this.username);
+		System.out.println("UserLoginRepository.isAuthenticated() " +this.password);
+		
+		UserDao userDao = new UserDao();
+		
+		UserDTO user = userDao.getUserName(username);
+		
+		System.out.println("UserLoginRepository.isAuthenticated()" +user.getName());
+		
+		return true;
+	}
 
 }

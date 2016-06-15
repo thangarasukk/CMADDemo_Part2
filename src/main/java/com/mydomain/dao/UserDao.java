@@ -24,6 +24,16 @@ public class UserDao {
 		return userDtoResult;
 	}
 	
+	public UserDTO getUserName(String userName){
+		UserDTO userDto = new UserDTO();
+		Datastore dataStore = ServicesFactory.getMongoDB();
+		Query<User> getQuery = dataStore.createQuery(User.class).field("name").equal(userName);
+		User userRequested = (User) getQuery.get();
+		UserDTO userDtoResult = new UserDTO();
+		userDtoResult = userDtoResult.fillFromModel(userRequested);
+		return userDtoResult;
+	}
+	
 	
 	public List<UserDTO> getUsers() {
 		Datastore dataStore = ServicesFactory.getMongoDB();

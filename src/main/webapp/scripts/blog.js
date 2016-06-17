@@ -48,7 +48,7 @@
 		  error(function(data, status, headers, config) {
 			  $scope.error = status;
 			  if (status === 401) {
-					$location.path('/login');
+					$location.path('/signup');
 				}
 
 		  });

@@ -289,8 +289,8 @@
         $scope.blog.title="";
         $scope.blog.synopsis="";
         $scope.blog.content="";
-        $scope.blog.posterUrl="images/content_image/default.jpg";
-        $scope.blog.tags="";
+        $scope.blog.posterUrl="";
+        $scope.blog.tags="general";
         $scope.blog.postedUserName=$rootScope.user.name;
         $scope.blog.postedUserId="5722ffa441fbd6d042b07202";
         $scope.selectedBlogDetails;
@@ -299,6 +299,10 @@
 
  		$scope.addBlog = function(blog){
      		$log.debug("SingleBlogPostController...in addBlog");
+            $log.debug("$scope.blog.posterUrl = " + $scope.blog.posterUrl);
+            if($scope.blog.posterUrl == ""){
+                $scope.blog.posterUrl="images/content_image/default.jpg";
+            }
  		    $log.debug(blog);
 
             var data = JSON.stringify(
@@ -311,7 +315,7 @@
                       postedUserName : blog.postedUserName,
                       postedUserId : blog.postedUserId
                     });
-                  alert( data);
+                  /* alert( data); */
                   $scope.selectedBlogDetails = blog;
 
             $log.debug(data);

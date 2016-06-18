@@ -54,10 +54,7 @@
                 <li class="dropdown" ng-show="user.isAuthenticated">
                     <a href="" data-toggle="dropdown" class="dropdown-toggle">{{ (user.name) || "animeshb"}} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Profile</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Questions</a></li>
-                        <li><a href="#">Answers</a></li>
+                        <li><a href="#/categorylist" ng-click="setMyBlogsCategory()">My Blogs</a></li>
                         <li class="divider"></li>
                         <!-- <li><a href="#" ng-click="headerCtrl.logout()">Logout</a></li> -->
                         <li><a href ng-click="headerCtrl.logout()">Logout</a></li>

@@ -372,11 +372,17 @@
 		console.log("HomeController: ");
 	}]);
     
-	app.controller('HeaderController',['$http' ,'$location', '$rootScope', '$scope',  function($http,$location,$rootScope, $scope){
+	app.controller('HeaderController',['$http' ,'$location', '$rootScope', '$scope', 'GlobalStroage',  function($http,$location,$rootScope, $scope, GlobalStroage){
 		console.log("[AniB]: blog.js :: HeaderController");		
 		$scope.isActive = function (viewLocation) { 
         	return viewLocation === $location.path();
     	};
+
+        $scope.setMyBlogsCategory = function(){
+            var selectedCategory = "MyBlogsCategory";
+            console.log("[AniB]: selectedCategory: " +selectedCategory);
+            GlobalStroage.setSelectedCategory(selectedCategory);
+        }
         
 		this.logout = function(){
 			console.log("[AniB]: Logout");

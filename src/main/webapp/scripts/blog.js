@@ -1,6 +1,6 @@
 (function(){
 
-	var app = angular.module('CMAD', ['ngRoute','angularUtils.directives.dirPagination','textAngular']).run(function($rootScope){
+	var app = angular.module('CMAD', ['ngRoute','angularUtils.directives.dirPagination','textAngular', 'angular-loading-bar']).run(function($rootScope){
 		$rootScope.user = {};
 		$rootScope.user.name = "default";
 		$rootScope.user.isAuthenticated = false;
@@ -34,8 +34,8 @@
     
 	app.controller('AllBlogsController',function($http, $log, $scope, GlobalStroage, $location){
 		var controller = this;
-		$scope.blogs=[];
-		console.log("[AniB]: blog.js :: AllBlogsController");
+		$scope.blogs={};
+		console.log("[AniB]: blog.js :: AllBlogsController: " +$scope.blogs);
         this.selectedBlog = {};
 
 		$http.get('rest/blog').
@@ -153,10 +153,12 @@
         
         $log.debug("restQuery = " + $scope.restQuery);
 
-        if($scope.restQuery != null){
+        if($scope.restQuery !== null){
             $http.get($scope.restQuery).
                 success(function(data, status, headers, config) {
                 $scope.blogs = data;
+
+                console.log("[AniB]: data: " +data);
                 $scope.isBlogListValid = true;
                 $log.debug("restQuery return success with size = " + $scope.blogs.length);
                 if($scope.blogs.length <= 0){

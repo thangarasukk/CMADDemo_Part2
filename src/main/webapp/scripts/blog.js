@@ -21,16 +21,13 @@
 					//Sucess Callback
 					str = JSON.stringify(response);
 					console.log("[AniB]: Sucess Callback: " +str);
-					
-					// $rootScope.user.name = response.data.userID;
-					// $rootScope.user.isAuthenticated = true;
-
 					$location.path('/login');
 				},
 				function(response){
 					str = JSON.stringify(response);
 					console.log("[AniB]: Failure Callback: " +response.status);
 				});
+            $scope.signupForm.$setPristine();
 			this.signup = {};
 		};
     });
@@ -39,7 +36,7 @@
 		var controller = this;
 		$scope.blogs=[];
 		console.log("[AniB]: blog.js :: AllBlogsController");
-        this.selectedBlog;
+        this.selectedBlog = {};
 
 		$http.get('rest/blog').
 		  success(function(data, status, headers, config) {
@@ -48,7 +45,7 @@
 		  error(function(data, status, headers, config) {
 			  $scope.error = status;
 			  if (status === 401) {
-					$location.path('/login');
+					$location.path('/signup');
 				}
 
 		  });
@@ -344,7 +341,7 @@
 	});
 
 
-	app.controller('LoginController', ['$http' ,'$location', '$rootScope', function($http, $location,$rootScope){
+	app.controller('LoginController', ['$http' ,'$location', '$rootScope', '$scope', function($http, $location,$rootScope, $scope){
 		this.login = {};
 		console.log("[AniB]: blog.js :: LoginController");
 		this.checkUser = function(){
@@ -363,6 +360,7 @@
 					str = JSON.stringify(response);
 					console.log("[AniB]: Failure Callback: " +response.status);
 				});
+            $scope.loginForm.$setPristine();
 			this.login = {};
 		};
 	}]);

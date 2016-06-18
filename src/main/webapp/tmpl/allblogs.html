@@ -3,13 +3,7 @@
     <div class="container">
 	    <div class = "col-lg-10">
 		    <div class="row">
-					<!-- <form class="form-inline">
-						<div class="form-group">
-							<label >Search</label>
-							<input type="text" ng-model="search" class="form-control" placeholder="Search">
-						</div>
-					</form> -->
-					<!-- http://www.bootply.com/t7O3HSGlbc# -->
+				<!-- http://www.bootply.com/t7O3HSGlbc# -->
                 <!-- http://stackoverflow.com/questions/18552714/bootstrap-3-how-to-maximize-input-width-inside-navbar -->
                 <form class="navbar-form">
                     <div class="form-group" style="display:inline;">
@@ -25,12 +19,6 @@
 				<div class="[ col-xs-12 col-sm-offset-1 col-sm-11 ]">
 					<ul class="event-list">
 						<li>
-						<!--
-							<time datetime="2014-07-20 2000">
-								<span class="day">{{postedDate}}</span>
-							</time>
-						-->
-						
 							<img alt="poster" src={{blog.posterUrl}} />
 							<div class="info">
 								<a href="#/singleblog" ng-click="updateSelectedBlog(blog)">
@@ -70,30 +58,5 @@
 	            </div>
 	        </div>
 		</div>
-    </div>   
-
-    <!-- Main Content -->
-<!--
-    <div class="container">
-    	<div class = "col-lg-10">
-	        <div class="row" dir-paginate="blog in blogs|filter:search|itemsPerPage:2" ng-init='postedDate=convertJSONDateToJavascriptDate(blog.postedDate)'>
-	            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-	                <div class="post-preview">
-	                 <a href="/CMADDemo/index.html#/singleblog" ng-click="updateSelectedBlog(blog)">
-	                        <h2 class="post-title">
-	                            {{blog.title}}
-	                        </h2>
-	                 </a>
-	                        <h3 class="post-subtitle">
-	                            {{blog.content}}
-	                        </h3>
-	                    <p class="post-meta">Posted by <a href="#">{{blog.postedUserName}}</a> on {{postedDate}}</p>
-	                </div>
-	                <hr>
-	            </div>
-	        </div>
-        </div>
-	</div>
--->
-    
+    </div>       
 </div>

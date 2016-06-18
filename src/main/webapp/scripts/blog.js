@@ -1,6 +1,6 @@
 (function(){
 
-	var app = angular.module('CMAD', ['ngRoute','angularUtils.directives.dirPagination','textAngular', 'angular-loading-bar']).run(function($rootScope){
+	var app = angular.module('CMAD', ['ngRoute','angularUtils.directives.dirPagination','textAngular', 'angular-loading-bar', 'ngAnimate']).run(function($rootScope){
 		$rootScope.user = {};
 		$rootScope.user.name = "default";
 		$rootScope.user.isAuthenticated = false;
@@ -122,7 +122,7 @@
         $scope.restQuery = null;
         $scope.selectedCategoryTitle = "Title";
         $scope.isMostViewedCategory = false;
-        $scope.isBlogListValid = false;
+        $scope.isBlogListValid = true;
 
         if(true == angular.equals($scope.selectedCategory, "MostViewedCategory")){
             $scope.restQuery = "rest/blog?orderBy=viewedCount";
@@ -159,7 +159,6 @@
                 $scope.blogs = data;
 
                 console.log("[AniB]: data: " +data);
-                $scope.isBlogListValid = true;
                 $log.debug("restQuery return success with size = " + $scope.blogs.length);
                 if($scope.blogs.length <= 0){
                     $scope.isBlogListValid = false;
@@ -187,6 +186,8 @@
         $scope.convertJSONDateToJavascriptDate = function(jsonDate){
         	return new Date(jsonDate).toUTCString();
         }
+
+
 	});
 
 	app.controller('SingleBlogController',function($http, $log, $scope, GlobalStroage, $location){

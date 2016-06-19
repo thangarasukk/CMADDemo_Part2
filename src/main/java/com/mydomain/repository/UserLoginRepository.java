@@ -29,9 +29,11 @@ public class UserLoginRepository {
 		
 		UserDTO user = userDao.getUserName(username);
 		
-		System.out.println("UserLoginRepository.isAuthenticated()" +user.getName());
-		
-		return true;
+		if ((this.username == user.getName()) && (this.password == user.getPassword()) ) {
+			return true;			
+		}else{
+			return false;
+		}
 	}
 
 }

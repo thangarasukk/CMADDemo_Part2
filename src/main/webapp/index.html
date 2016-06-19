@@ -20,6 +20,7 @@
     </style>
 
     <link rel="stylesheet" href="css/vendor/bootstrap.css">
+    <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.7.1/loading-bar.min.css' type='text/css' media='all' />
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/vendor/bootstrap-theme.min.css">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
@@ -53,10 +54,7 @@
                 <li class="dropdown" ng-show="user.isAuthenticated">
                     <a href="" data-toggle="dropdown" class="dropdown-toggle">{{ (user.name) || "animeshb"}} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Profile</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Questions</a></li>
-                        <li><a href="#">Answers</a></li>
+                        <li><a href="#/categorylist" ng-click="setMyBlogsCategory()">My Blogs</a></li>
                         <li class="divider"></li>
                         <!-- <li><a href="#" ng-click="headerCtrl.logout()">Logout</a></li> -->
                         <li><a href ng-click="headerCtrl.logout()">Logout</a></li>
@@ -91,6 +89,9 @@
 	<script type="text/javascript" src='scripts/dist/textAngularSetup.js'></script>
 	<script type="text/javascript" src="scripts/dist/textAngular.js"></script>
 	<script type="text/javascript" src='scripts/dist/textAngular.min.js'></script>
+    <script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.7.1/loading-bar.min.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-animate.js"></script>
+
 <!--
 	<script type="text/javascript" src="scripts/infolinks_main.js"></script>
 -->

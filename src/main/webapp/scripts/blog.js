@@ -1,6 +1,6 @@
 (function(){
 
-	var app = angular.module('CMAD', ['ngRoute','angularUtils.directives.dirPagination','textAngular']).run(function($rootScope){
+	var app = angular.module('CMAD', ['ngRoute','angularUtils.directives.dirPagination','textAngular', 'angular-loading-bar', 'ngAnimate']).run(function($rootScope){
 		$rootScope.user = {};
 		$rootScope.user.name = "default";
 		$rootScope.user.isAuthenticated = false;
@@ -34,8 +34,8 @@
     
 	app.controller('AllBlogsController',function($http, $log, $scope, GlobalStroage, $location){
 		var controller = this;
-		$scope.blogs=[];
-		console.log("[AniB]: blog.js :: AllBlogsController");
+		$scope.blogs={};
+		console.log("[AniB]: blog.js :: AllBlogsController: " +$scope.blogs);
         this.selectedBlog = {};
 
 		$http.get('rest/blog').
@@ -122,7 +122,7 @@
         $scope.restQuery = null;
         $scope.selectedCategoryTitle = "Title";
         $scope.isMostViewedCategory = false;
-        $scope.isBlogListValid = false;
+        $scope.isBlogListValid = true;
 
         if(true == angular.equals($scope.selectedCategory, "MostViewedCategory")){
             $scope.restQuery = "rest/blog?orderBy=viewedCount";
@@ -153,11 +153,12 @@
         
         $log.debug("restQuery = " + $scope.restQuery);
 
-        if($scope.restQuery != null){
+        if($scope.restQuery !== null){
             $http.get($scope.restQuery).
                 success(function(data, status, headers, config) {
                 $scope.blogs = data;
-                $scope.isBlogListValid = true;
+
+                console.log("[AniB]: data: " +data);
                 $log.debug("restQuery return success with size = " + $scope.blogs.length);
                 if($scope.blogs.length <= 0){
                     $scope.isBlogListValid = false;
@@ -185,6 +186,8 @@
         $scope.convertJSONDateToJavascriptDate = function(jsonDate){
         	return new Date(jsonDate).toUTCString();
         }
+
+
 	});
 
 	app.controller('SingleBlogController',function($http, $log, $scope, GlobalStroage, $location){
@@ -369,11 +372,17 @@
 		console.log("HomeController: ");
 	}]);
     
-	app.controller('HeaderController',['$http' ,'$location', '$rootScope', '$scope',  function($http,$location,$rootScope, $scope){
+	app.controller('HeaderController',['$http' ,'$location', '$rootScope', '$scope', 'GlobalStroage',  function($http,$location,$rootScope, $scope, GlobalStroage){
 		console.log("[AniB]: blog.js :: HeaderController");		
 		$scope.isActive = function (viewLocation) { 
         	return viewLocation === $location.path();
     	};
+
+        $scope.setMyBlogsCategory = function(){
+            var selectedCategory = "MyBlogsCategory";
+            console.log("[AniB]: selectedCategory: " +selectedCategory);
+            GlobalStroage.setSelectedCategory(selectedCategory);
+        }
         
 		this.logout = function(){
 			console.log("[AniB]: Logout");

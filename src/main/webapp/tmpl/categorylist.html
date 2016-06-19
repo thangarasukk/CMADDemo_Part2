@@ -15,24 +15,25 @@
 								<p class="desc">{{blog.synopsis}}.</p>
 								<p class="post-meta">Posted by <a href="#">{{blog.postedUserName}}</a> on {{postedDate}}</p>
 							</div>
-						</li
+						</li>
 					</ul>
 	    		</div>
-	    		<div ng-show="isMostViewedCategory">
+	    		<!-- <div ng-show="isMostViewedCategory">
 	    			{{blog.viewedCount}}
-	    		</div>
+	    		</div> -->
 	    	</div>
 			<div class="row" ng-hide="isBlogListValid">
 				<h3>No Blogs found</h3>
 			</div>
-			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" >
 				<dir-pagination-controls
 					max-size="10"
 					direction-links="true"
 					boundary-links="true" >
 				</dir-pagination-controls>
 			</div>	    	
-		</div>   
+		</div>
+
     </div>   
    
 </div>

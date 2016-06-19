@@ -210,8 +210,11 @@ public class UserBlog {
 	 * }<p>
 	 * </code></dd>
 	 * 
-	 * @param None
-	 * @return Search result of user Blogs in JSON format
+	 * @param String searchstring & int offset & int limit
+	 * @return 
+	 * <ul>
+	 * <li> HTTP 200 (OK) - Search result of user Blogs in JSON format </li>
+	 * </ul>
 	 */
 	@GET  
 	@Path("/search")  
@@ -245,7 +248,7 @@ public class UserBlog {
 	 * }<p>
 	 * </code></dd>
 	 * 
-	 * @param None
+	 * @param String searchstring
 	 * @return Search result count of user Blogs in JSON format
 	 */
 	@GET  
@@ -280,12 +283,17 @@ public class UserBlog {
 	 * </code></dd>
 	 * 
 	 * @param User blog in JSON format
-	 * @return None
+	 * @return 
+	 * <ul>
+	 * <li> HTTP 200 (OK) - create blog is successful </li>
+	 * <li> HTTP 500 (INTERNAL_SERVER_ERROR) - invalid argument </li>
+	 * </ul>
 	 */
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void createBlog(BlogDTO blogsDto){
-		blogDao.createBlog(blogsDto);
+	public Response createBlog(BlogDTO blogsDto){
+		int response_code = blogDao.createBlog(blogsDto);
+		return daoReturnCodes.getHttpResponseFromCode(response_code);
 	}
 	
 	/**
@@ -313,14 +321,40 @@ public class UserBlog {
 	 * </code></dd>
 	 * 
 	 * @param User blog in JSON format
-	 * @return None
+	 * @return 
+	 * <ul>
+	 * <li> HTTP 200 (OK) - update blog is successful </li>
+	 * <li> HTTP 500 (INTERNAL_SERVER_ERROR) - invalid argument </li>
+	 * </ul>
 	 */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void updateBlog(BlogDTO blogsDto){
-		blogDao.updateBlog(blogsDto);
+	public Response updateBlog(BlogDTO blogsDto){
+		int response_code = blogDao.updateBlog(blogsDto);
+		return daoReturnCodes.getHttpResponseFromCode(response_code);
 	}
 	
+	/**
+	 * <dl><dt><span class="strong">Description :</span></dt>
+	 * 		<dd>This API increments blog view count of the id given<p>
+	 * 		</dd>
+	 * <p>
+	 * <dl><dt><span class="strong">Rest URL :</span></dt>
+	 * 		<dd><code>http://hostname:port/CMADDemo/rest/blog/viewedcount/id </code><p>
+	 * 		</dd>
+	 * <p>
+	 * <dl><dt><span class="strong">Example url:</span></dt>
+	 * 		<dd><code>http://localhost:8080/CMADDemo/rest/blog/viewedcount/572776a8f63b961ab4aa6fe0 </code></dd>
+	 * <p>
+	 * </code></dd>
+	 * 
+	 * @param String id - id of the blog requested
+	 * @return 
+	 * <ul>
+	 * <li> HTTP 200 (OK) - viewcount update is successful </li>
+	 * <li> HTTP 500 (INTERNAL_SERVER_ERROR) - invalid argument </li>
+	 * </ul>
+	 */
 	@PUT
 	@Path("/viewedcount/{param}") 
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -345,13 +379,16 @@ public class UserBlog {
 	 * 
 	 * @param String id - id of the blog requested
 	 * @return 
-	 * @return Response
+	 * <ul>
+	 * <li> HTTP 200 (OK) - delete is successful </li>
+	 * <li> HTTP 500 (INTERNAL_SERVER_ERROR) - invalid argument </li>
+	 * </ul>
 	 */
 	@DELETE
 	@Path("/{param}")
 	@Produces({MediaType.APPLICATION_JSON})
 	public Response deleteBlog(@PathParam("param") String id) {
-		blogDao.deleteBlog(id);
-		return Response.ok(null).build();
+		int response_code = blogDao.deleteBlog(id);
+		return daoReturnCodes.getHttpResponseFromCode(response_code);
 	}
 }

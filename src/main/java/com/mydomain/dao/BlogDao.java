@@ -97,28 +97,46 @@ public class BlogDao {
 		return blogs.size();
 	}
 	
-	public void createBlog(BlogDTO blogsDto){
-		Blog blog = blogsDto.toModel();
-		Datastore dataStore = ServicesFactory.getMongoDB();
-		dataStore.save(blog);
+	public int createBlog(BlogDTO blogsDto){
+		int response_code = DaoReturnCodes.RETURN_STATUS_UNKNOWN_ERROR;
+		if(null != blogsDto){
+			Blog blog = blogsDto.toModel();
+			Datastore dataStore = ServicesFactory.getMongoDB();
+			dataStore.save(blog);
+			response_code = DaoReturnCodes.RETURN_STATUS_OK;
+		}else{
+			response_code = DaoReturnCodes.RETURN_STATUS_INVALID_ARGUMENT;
+		}
+		return response_code;
 	}
 	
-	public void updateBlog(BlogDTO blogsDto){
-		Blog blog = blogsDto.toModel();
-		Datastore dataStore = ServicesFactory.getMongoDB();
-		UpdateOperations<Blog> ops;
-		ops = dataStore.createUpdateOperations(Blog.class);
-		ops.set("title", 	blog.getTitle());
-		ops.set("synopsis", blog.getSynopsis());
-		ops.set("content", 	blog.getContent());
-		ops.set("posterUrl", blog.getPosterUrl());
-		ops.set("tags", 	blog.getTags());
-		ops.set("viewedCount", 	blog.getViewedCount());
-		ops.set("postedDate",blog.getPostedDate());
-		ops.set("postedUserName", 	blog.getPostedUserName());
-		ops.set("postedUserId", 	blog.getPostedUserId());
-		Query<Blog> updateQuery = dataStore.createQuery(Blog.class).field("_id").equal(blog.getId());
-		dataStore.update(updateQuery, ops);
+	public int updateBlog(BlogDTO blogsDto){
+		int response_code = DaoReturnCodes.RETURN_STATUS_UNKNOWN_ERROR;
+		if(null != blogsDto){
+			try{
+				Blog blog = blogsDto.toModel();
+				Datastore dataStore = ServicesFactory.getMongoDB();
+				UpdateOperations<Blog> ops;
+				ops = dataStore.createUpdateOperations(Blog.class);
+				ops.set("title", 	blog.getTitle());
+				ops.set("synopsis", blog.getSynopsis());
+				ops.set("content", 	blog.getContent());
+				ops.set("posterUrl", blog.getPosterUrl());
+				ops.set("tags", 	blog.getTags());
+				ops.set("viewedCount", 	blog.getViewedCount());
+				ops.set("postedDate",blog.getPostedDate());
+				ops.set("postedUserName", 	blog.getPostedUserName());
+				ops.set("postedUserId", 	blog.getPostedUserId());
+				Query<Blog> updateQuery = dataStore.createQuery(Blog.class).field("_id").equal(blog.getId());
+				dataStore.update(updateQuery, ops);
+				response_code = DaoReturnCodes.RETURN_STATUS_OK;
+			}catch(IllegalArgumentException execption){
+	    		response_code = DaoReturnCodes.RETURN_STATUS_INVALID_ARGUMENT;
+	    	}
+		}else{
+			response_code = DaoReturnCodes.RETURN_STATUS_INVALID_ARGUMENT;
+		}
+		return response_code;
 	}
 	
 	public int updateBlogViewedCount(String blogId) {
@@ -148,18 +166,28 @@ public class BlogDao {
 				response_code = DaoReturnCodes.RETURN_STATUS_CONTENT_NOT_FOUND;
 			}
 		}catch(IllegalArgumentException execption){
-    		System.out.println("BlogDTO.toModel() IllegalArgumentException");
     		response_code = DaoReturnCodes.RETURN_STATUS_INVALID_ARGUMENT;
     	}
-		
 		return response_code;
 	}
 	
-	public void deleteBlog(String id) {
+	public int deleteBlog(String id) {
+		int response_code = DaoReturnCodes.RETURN_STATUS_UNKNOWN_ERROR;
 		BlogDTO blogsDto = new BlogDTO();
-		Blog blog = blogsDto.toModel(id);
-		Datastore dataStore = ServicesFactory.getMongoDB();
-		Query<Blog> deleteQuery = dataStore.createQuery(Blog.class).field("_id").equal(blog.getId());
-		dataStore.delete(deleteQuery);
+		if(null != id){
+			try{
+				Blog blog = blogsDto.toModel(id);
+				Datastore dataStore = ServicesFactory.getMongoDB();
+				Query<Blog> deleteQuery = dataStore.createQuery(Blog.class).field("_id").equal(blog.getId());
+				dataStore.delete(deleteQuery);
+				response_code = DaoReturnCodes.RETURN_STATUS_OK;
+			}catch(IllegalArgumentException execption){
+	    		response_code = DaoReturnCodes.RETURN_STATUS_INVALID_ARGUMENT;
+			}
+		}else{
+			response_code = DaoReturnCodes.RETURN_STATUS_INVALID_ARGUMENT;
+		}
+
+		return response_code;
 	}
 }

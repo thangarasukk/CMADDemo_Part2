@@ -347,6 +347,7 @@
 	app.controller('LoginController', ['$http' ,'$location', '$rootScope', '$scope', function($http, $location,$rootScope, $scope){
 		this.login = {};
 		console.log("[AniB]: blog.js :: LoginController");
+		$scope.createFailed = false;
 		this.checkUser = function(){
 			str = JSON.stringify(this.login);
 			console.log("[AniB]: checkUser(): " +str);
@@ -362,6 +363,7 @@
 				function(response){
 					str = JSON.stringify(response);
 					console.log("[AniB]: Failure Callback: " +response.status);
+					$scope.createFailed = true;
 				});
             $scope.loginForm.$setPristine();
 			this.login = {};

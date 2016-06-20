@@ -31,7 +31,12 @@ public class UserLoginRepository {
 		
 		System.out.println("UserLoginRepository.isAuthenticated()" +user.getName());
 		
-		return true;
+		if ((this.username.equals(user.getName())) && (this.password.equals(user.getPassword())) ) {
+			return true;
+		}else{
+			return false;
+		}
+		
 	}
 
 }
